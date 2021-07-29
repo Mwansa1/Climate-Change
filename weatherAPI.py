@@ -22,7 +22,7 @@ def search (city):
     # getting the pressure
         pressure = main['pressure']
     # weather report
-#         print(main)
+        print(main)
 #         print(f"{CITY:-^30}")
 #         print(f"Temperature: {temperature}")
 #         print(f"Humidity: {humidity}")
@@ -31,3 +31,4 @@ def search (city):
         return main
     # updating the URL
 
+# search('maplewood')

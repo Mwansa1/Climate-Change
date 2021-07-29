@@ -27,7 +27,7 @@ def register():
 def search_by_city():
     city = request.form["city"]
     data = search(city)
-#     print(data)
+    print(data)
     return render_template("home.html", data=data) 
 
   
