@@ -1,0 +1,7 @@
+{% extends "layout.html" %} {% block content %} <title> Post </title>
+<h2>{{ subtitle }}</h2>
+<p>{{ text }}</p> 
+{{ post.title}}<br />
+{{post.date_posted}}<br />
+{{post.content}}<br/> 
+<a href='{{ url_for('posts', id=post.id) }}'> Back to Blog</a>{% endblock content %}
