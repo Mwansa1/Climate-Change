@@ -2,8 +2,10 @@ from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from turbo_flask import Turbo
-from forms import RegistrationForm
+from forms import RegistrationForm, LoginForm
 from sqlalchemy import exc, text
+from flask_login import LoginManager, UserMixin, login_required, \
+    login_user, logout_user, current_user
 # import statements from prev projects, add/remove as needed
 
 app = Flask(__name__)
@@ -14,8 +16,12 @@ app.config['SECRET_KEY'] = '525901fece4e62b2eb11fa3c1a302835'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 class User(db.Model):
     """An admin user capable of viewing reports.
+    :param str username: username of user
     :param str email: email address of user
     :param str password: encrypted password for the user
     """
@@ -27,7 +33,7 @@ class User(db.Model):
     authenticated = db.Column(db.Boolean, default=False)
 
     def is_active(self):
-        """True, as all users are active."""
+        """True, all users are active."""
         return True
 
     def get_id(self):
@@ -45,6 +51,9 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 # basic homepage, to be edited as needed with layout.html and main.css
 @app.route("/")
@@ -70,8 +79,25 @@ def register():
             flash(f'Username or email account already exists!', 'success')
         else:
             flash(f'Account created for {form.username.data}!', 'success')
-            return redirect(url_for('home'))  # if so - send to home page
+            return redirect(url_for("home"))  # if so - send to home page
     return render_template('register.html', title='Register', form=form)
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    """For GET requests, display the login form.
+    For POSTS, login the current user by processing the form.
+    """
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.get(form.username.data)
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                user.authenticated = True
+                db.session.add(user)
+                db.session.commit()
+                login_user(user, remember=True)
+                return redirect(url_for("home"))
+    return render_template("login.html", form=form)
 
 # @app.route("/more")
 # def second_page():
