@@ -1,9 +1,9 @@
 {% extends "layout.html" %} {% block content %} <title> {{title}}</title>
-<h2>{{ subtitle }}</h2>
-<p>{{ text }}</p>
-<h2 class="text-center">Blog</h2>
+<div class="content-section">
+<h2 class="text-center">Create Post </h2>
 <form method="POST" action="" >
     {{ form.hidden_tag() }}
+    <legend class="border-bottom mb-4">{{ legend }}</legend>
     {{ form.title.label(class="form-control-label") }}
     {{ form.title(class="form-control form-control-lg") }}
     {{ form.content.label(class="form-control-label") }}
@@ -11,4 +11,4 @@
     
         {{ form.submit(class="btn btn-outline-info") }}
    
-</form> {% endblock content %}
+</form> </div>{% endblock content %}
