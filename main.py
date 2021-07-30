@@ -32,6 +32,10 @@ login_manager = LoginManager(app)
 login_manager.login_view = "login"
 login_manager.login_message_category = 'info'
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
 class User(db.Model):
     """An admin user capable of viewing reports.
     :param str username: username of user
@@ -64,10 +68,6 @@ class User(db.Model):
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
 
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
