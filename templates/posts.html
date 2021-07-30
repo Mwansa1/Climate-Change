@@ -4,9 +4,16 @@
     <h2>{{ subtitle }}</h2>
     <p>{{ text }}</p> 
 {% for post in posts %} 
-    {{ post.title}}<br />
-    {{post.date_posted}}<br />
-    {{post.content}}<br /> 
-    <a href='{{ url_for('post', id=post.id) }}'> View Post</a>
+<article class="media content-section">
+    <div class="media-body">
+     <div class="article-metadata">
+        {{ post.author.username }}
+        <small class="text-muted">{{ post.date_posted.strftime('%M-%d-%y') }}</small>
+        </div>
+        <h2><a class="article-title" href='{{ url_for('post', id=post.id) }}'> {{ post.title}}</a> </h2>
+
+        <p class="article-content">{{post.content}}</p>
+        </div>
+   </article>
 {% endfor %} 
 {% endblock content %}
