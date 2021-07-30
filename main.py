@@ -152,7 +152,6 @@ def posts():
                            posts=posts,
                            subtitle='Post',
                            text='Lets make some change')
-<<<<<<< HEAD
  
 
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
@@ -187,21 +186,13 @@ def delete_post(id):
     return redirect(url_for('home'))
 
 
-=======
-
-
-
 @app.route("/search_by_city", methods=["POST"])
 def search_by_city():
     city = request.form["city"]
     data = search(city)
     print(data)
     return render_template("home.html", data=data) 
+ 
 
-  
-
-    
-    
->>>>>>> master
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
