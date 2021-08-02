@@ -5,10 +5,11 @@ from turbo_flask import Turbo
 
 import requests
 from weatherAPI import search
+from co2_emissions import make_save_barchart
 # from weatherAPI import 
 # import statements from prev projects, add/remove as needed
 
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, SuggestionForm
 from sqlalchemy import exc, text
 from flask_login import LoginManager, UserMixin, login_required, \
     login_user, logout_user, current_user
@@ -26,6 +27,8 @@ app.config['SECRET_KEY'] = '525901fece4e62b2eb11fa3c1a302835'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+make_save_barchart()
 
 login_manager = LoginManager(app)
 # login_manager.init_app(app)
@@ -80,6 +83,30 @@ class Posts(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+    
+class FoodSuggestion(db.Model):
+    __tablename__ = 'food_suggestion'
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+    
+    def __repr__(self):
+        return f"FoodSuggestion('{self.id}', '{self.content}')"
+
+class TravelSuggestion(db.Model):
+    __tablename__ = 'travel_suggestion'
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+    
+    def __repr__(self):
+        return f"TravelSuggestion('{self.id}', '{self.content}')"
+
+class EnergySuggestion(db.Model):
+    __tablename__ = 'energy_suggestion'
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+    
+    def __repr__(self):
+        return f"EnergySuggestion('{self.id}', '{self.content}')"
     
 # basic homepage, to be edited as needed with layout.html and main.css
 @app.route("/")
@@ -137,9 +164,84 @@ def logout():
 # @app.route("/more")
 # def second_page():
 
-@app.route("/suggestions")
+@app.route("/suggestions", methods=['GET', 'POST'])
 def suggestions():
-    return render_template("suggestions.html")
+    # food suggestions
+    food_suggestions = [
+        {'id': 0, 'content': 'Avoid overly processed foods. These foods have a high carbon footprint due to manufacuring, traveling, and distribution.'},
+        {'id': 1, 'content': 'Buy locally made food, your carbon footprint will decrease as a result.'},
+        {'id': 2, 'content': 'Eat less red meat to reduce your carbon footprint.'},
+        {'id': 3, 'content': 'Buy fair trade products to reduce your carbon footprint.'},
+        {'id': 4, 'content': 'Grow your own food to save natural resources in mass production.'}
+    ]
+    
+    travel_suggestions = [
+        {'id': 0, 'content': 'Ride a bike or walk to places that are close by instead of driving.'},
+        {'id': 1, 'content': 'Use public transportation instead of driving.'},
+        {'id': 2, 'content': 'Mitigate the negative impact of air travel by flying less often.'},
+        {'id': 3, 'content': 'Don’t speed! Gas mileage declines rapidly above 60 mph. Each 5 mph increase above 60 is like paying an additional 10 cents a gallon for gasoline.'},
+        {'id': 4, 'content': 'Drive hybrid or electric vehicles to reduce pollution from exhaust.'}
+    ]
+    
+    energy_suggestions = [
+        {'id': 0, 'content': 'Unplug electronics you are not using to save energy.'},
+        {'id': 1, 'content': 'Replace your light bulb with LED ones, they save 75% more energy!'},
+        {'id': 2, 'content': 'Turn off the lights in rooms you are not in.'},
+        {'id': 3, 'content': 'Avoid turning on the light when you can use sunlight instead.'},
+        {'id': 4, 'content': 'Use dimmers in common areas of your house to save a significant amount of energy'}
+    ]
+    
+    # populate food suggestion table
+    for fs in food_suggestions:
+        suggestion = FoodSuggestion(id=fs['id'], content=fs['content'])
+        try:
+            db.session.add(suggestion)
+            db.session.commit()
+        except exc.IntegrityError:
+            db.session.rollback()
+    
+    # populate travel suggestion table
+    for ts in travel_suggestions:
+        suggestion = TravelSuggestion(id=ts['id'], content=ts['content'])
+        try:
+            db.session.add(suggestion)
+            db.session.commit()
+        except exc.IntegrityError:
+            db.session.rollback()
+            
+    # populate energy suggestion table
+    for es in energy_suggestions:
+        suggestion = EnergySuggestion(id=es['id'], content=es['content'])
+        try:
+            db.session.add(suggestion)
+            db.session.commit()
+        except exc.IntegrityError:
+            db.session.rollback()
+    
+    # form for selecting suggestion type
+    form = SuggestionForm()
+    if form.validate_on_submit():
+        suggestion = form.suggestion.data
+        
+        # get relevant list of suggestions
+        suggestions = []
+        
+        if form.suggestion.data == 'food_suggestion':
+            for i in range(5):
+                suggestions.append(FoodSuggestion.query.get(i).content)
+            return render_template('suggestionResults.html', suggestions=suggestions)
+        
+        elif form.suggestion.data == 'travel_suggestion':
+            for i in range(5):
+                suggestions.append(TravelSuggestion.query.get(i).content)
+            return render_template('suggestionResults.html', suggestions=suggestions)
+        
+        elif form.suggestion.data == 'energy_suggestion':
+            for i in range(5):
+                suggestions.append(EnergySuggestion.query.get(i).content)
+            return render_template('suggestionResults.html', suggestions=suggestions)
+    
+    return render_template("suggestions.html", form=form)
 
 @app.route("/community")
 def community():
@@ -227,4 +329,5 @@ def search_by_city():
  
 
 if __name__ == '__main__':
+    db.create_all()
     app.run(debug=True, host="0.0.0.0")

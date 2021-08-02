@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 class RegistrationForm(FlaskForm):
@@ -16,3 +16,16 @@ class LoginForm(FlaskForm):
     username = StringField('Username')
     password = PasswordField('Password')
     submit = SubmitField('Login')
+    
+class SuggestionForm(FlaskForm):
+    
+    suggestion = SelectField(
+        'Sustainable Suggestions',
+        choices=[
+            ('food_suggestion', 'Food'),
+            ('travel_suggestion', 'Travel'),
+            ('energy_suggestion', 'Energy')
+        ]
+    )
+    
+    submit = SubmitField('Submit')
