@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 from turbo_flask import Turbo
 
 import requests
-from WeatherAPI import search
+from weatherAPI import search
 # from weatherAPI import 
 # import statements from prev projects, add/remove as needed
 
