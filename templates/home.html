@@ -1,76 +1,124 @@
 {% extends "layout.html" %} {% block content %} 
-<section class="home">
-    <h3 id="scroll-text">Scroll Down...</h3>
-    <div class="planet" id="planet-img"> </div>
-    <div class="text-box">
-        <h1>Stats</h1>
-        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+<section class="section1">
+    <div class="cont">
+        <h3 id="scroll-text">Scroll Down...</h3>
+        
+        <div class="planet" id="planet-img"> </div>
+        <div class="text-box">
+            <h1>Stats</h1>
+            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+        </div>
+        
+        <script type="text/javascript">
+            value = 
+            let earth = document.getElementById('planet-img');
+            let text = document.getElementById('scroll-text');
+            var navbar = document.getElementById("navbar");
+            var sticky = navbar.offsetTop;
+            window.addEventListener('scroll', function() {
+                if(window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky")
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            earth.style.transform = 'translateY(' + value * -1.95 + 'px)'; 
+            text.style.transform = 'rotate(89.19deg) translatex(' + value * 0.75 + 'px)';
+            })
+        </script>
     </div>
-    <script type="text/javascript">
-        value = 
-        let earth = document.getElementById('planet-img');
-        let text = document.getElementById('scroll-text');
-        var navbar = document.getElementById("navbar");
-        var sticky = navbar.offsetTop;
-        window.addEventListener('scroll', function() {
-            if(window.pageYOffset >= sticky) {
-                navbar.classList.add("sticky")
-            } else {
-                navbar.classList.remove("sticky");
-            }
-        earth.style.transform = 'translateY(' + value * -1.95 + 'px)'; 
-        text.style.transform = 'rotate(89.19deg) translatex(' + value * 0.75 + 'px)';
-        })
-    </script>
 </section>
+
 <section class="information">
-    <div class="container">
-        <h1>Information</h1>
-        <div class="info-text-box">
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-        </div>
-        <div class="stats-text">
-            <h2> Statistics</h2>
-            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+    <div class="cont">
+            <div class="split">
+            <div>    
+                <h1>Information</h1>
+                <div class="info-text-box">
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                </div>
+            </div>
+                
+            <div >
+                <h2> Statistics</h2>
+                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+            </div>
+                
         </div>
     </div>
 </section>
+
+<!-- <section>
+    <div class="cont">
+        <div class="box rounded" id="shape1"> </div>
+        <div class="box accent" id="shape2"> </div>
+        <div class="elipse" id="elipse4"> </div>
+        <div class="elipse" id="elipse3"> </div>
+
+    </div>
+    
+    <script type="text/javascript">
+            let shape1 = document.getElementById('shape1');
+            let shape2 = document.getElementById('shape2');
+    //         var navbar = document.getElementById("navbar");
+    //         var sticky = navbar.offsetTop;
+            window.addEventListener('scroll', function() {
+                var value= window.scrollY;
+                shape1.style.transform = 'translateY(' + value * .25 + 'px)'; //0.25
+                shape2.style.transform = 'translateY(' + value * .25 + 'px)';//0.15
+//                 earth.style.top = value *0.5 + 'px';
+            })
+    </script>
+</section> -->
+
 <section class="climate-stats">
-    <div class="container">
-        <h1>Climate Stats</h1>
-        <h2>Enter a City</h2>
-        <form action="{{url_for('search_by_city')}}" method="POST" role="form">
-            <input name="city" type="text" pattern="[A-Za-z?.!, ]{1,30}" class="form-control" placeholder="Enter a City." title=" Enter only letters and . ? !,maximum of 30 characters  e.g Hi!">
-        </form>
-    </div>
-    <div class="rounded-text-box">
-        <h1>Output</h1>
+    <div class="cont">
+        <div class="split">
+            <div>
+                <h1>Climate Stats</h1>
+                <h2>Enter a City</h2>
+                <form action="{{url_for('search_by_city')}}" method="POST" role="form">
+                    <input name="city" type="text" pattern="[A-Za-z?.!, ]{1,30}" class="form-control" placeholder="Enter a City." title=" Enter only letters and . ? !,maximum of 30 characters  e.g Hi!">
+                </form>
+            </div>
+            <div>
+                <div class="text-box-rounded">
+                    <img src="static/barchart.png" alt="barchart carbon emissions">
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
 <section class="more">
-    <div class="container">
-        <h1>More</h1>
-        <div id="elipse">
-            <h2>Join the community</h2>
-            <a href="#"><button class="button-main">Start</button></a>
-        </div>
-        <div id="elipse2">
-            <h2> Get personalized suggestions</h2>
-            <a href="#"><button class="button-main">Start</button></a>
+    <div class="cont">
+        <div class="split">
+            <div>
+                <h1>More</h1>
+                <div class="elipse" id="elipse1">
+                    <h2>Join the community</h2>
+                    <a href="#"><button class="button-main">Start</button></a>
+                </div>
+            </div>
+            <div class="elipse" id="elipse2">
+                <h2> Get personalized suggestions</h2>
+                <a href="/suggestions"><button class="button-main">Start</button></a>
+            </div>
         </div>
     </div>
 </section>
 <section class="resources">
-    <div class="container">
+    <div class="cont">
         <h1>Other Resources</h1>
-        <div class="small-text-box" id="box1">
-            <h2>Resource 1</h2>
-        </div>
-        <div class="small-text-box" id="box2">
-            <h2>Resource 2</h2>
-        </div>
-        <div class="small-text-box" id="box3">
-            <h2>Resource 3</h2>
-        </div>
+        <div class="split">
+            <div class="small-text-box" id="box1">
+                <h2>Resource 1</h2>
+            </div>
+            <div class="small-text-box" id="box2">
+                <h2>Resource 2</h2>
+            </div>
+            <div class="small-text-box" id="box3">
+                <h2>Resource 3</h2>
+            </div>
+       </div>
     </div>
 </section> {% endblock content %}
