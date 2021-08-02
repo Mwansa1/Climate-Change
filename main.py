@@ -5,6 +5,7 @@ from turbo_flask import Turbo
 
 import requests
 from weatherAPI import search
+from co2_emissions import make_save_barchart
 # from weatherAPI import 
 # import statements from prev projects, add/remove as needed
 
@@ -26,6 +27,8 @@ app.config['SECRET_KEY'] = '525901fece4e62b2eb11fa3c1a302835'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+make_save_barchart()
 
 login_manager = LoginManager(app)
 # login_manager.init_app(app)
