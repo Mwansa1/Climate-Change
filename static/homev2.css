@@ -3,65 +3,21 @@
 /* Home page stuff 
  =====================
 */
-h1 {
+/* h1 {
     font-size: 8.5em;
-}
-
-h1#info-text {
-    font-size: 5.3em;
-}
-
-#r {
-    text-align: left;
-}
+} */
+h1 {
+        font-size: 5.3em;
+    }
 
 h2 {
-    font-size: 2em;
-}
-
-h3 {
-    position: absolute;
-    height: 40px;
-    left: 0px;
-    color: #A0AAAC;
-    overflow-y: hidden;
-    transform: rotate(89.19deg) translatex(60px);
-}
-
-section {
-    overflow-y: hidden;
-    padding: 4rem 0;
-    height: min(90%, 70.5rem);
-}
-
-.cont {
-    margin-inline: auto;
-    width: min(90%, 70.5rem);
-    overflow-y: hidden
-}
-
-.text-box {
-    /* border: dashed; */
-    width: 30%;
-    padding: 5%;
-}
-
-.accent {
-    background: #EBBD10;
-}
-
-.rounded {
-    border-radius: 25px;
+        font-size: 3em;
 }
 
 .split {
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
-}
-
-.vertical{
-    margin:10%;
 }
 
 @media (min-width: 57em) {
@@ -77,14 +33,14 @@ section {
         margin-left: 2em;
     }
 
-    h1 {
+/*     h1 {
         font-size: 5.3em;
     }
 
     h2 {
         font-size: 3em;
     }
-
+ */
     .text-box.accent {
         position: relative;
         transform: translate3d(0%, -253%, 10px);
@@ -96,47 +52,22 @@ section {
     
 }
 
-.planet {
-    width: 90%;
-    height: 90%;
+
+section {
     overflow-y: hidden;
-    position: relative;
-    right: 0;
-    transform: translatey(10px);
+    padding: 4rem 0;
+    height: min(90%, 70.5rem);
 }
 
-/* .planet{
-    height: 90%;
-    width: 90%;
-    margin: 0 0 0 21%;
-    transform: translateY(0px);
-    overflow-y: hidden;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1000;
-    background: radial-gradient(50% 50% at 50% 50%, #467B33 22.3%, #39616D 76.88%, #374349 84.04%)
-} */
-
-/* .elipse {
-    height: 25em;
-    width: 25em;
-    border-radius: 50%;
-    padding: 7.20em;
-    background: #39616D;
-    text-align: center;
-    overflow-y: hidden;
-
+.cont {
+    margin-inline: auto;
+    width: min(90%, 70.5rem);
+    overflow-y: hidden
 }
- */
 
-.circle{
-    width: 100px;
-    height: 100px;
-     border-radius: 50%;
-}
 .elipse {
     height: 50%;
-    width: 50%;
+    width: 100%;
     border-radius: 50%;
     padding: 9.2em;
     background: #39616D;
@@ -145,11 +76,10 @@ section {
     /* background: #fff; */
 } 
 
-
 div#elipse1 {
-    background: #2B7A78;
-    height: auto;
+    height: 70%;
     width: 100%;
+    padding: 6em;
 }
 
 div#elispse2 {
@@ -158,97 +88,159 @@ div#elispse2 {
     right: 0;
 }
 
-div#elipse3{
-    background: #2B7A78;
 
+
+/* .planet{
+    height: 100%;
+    padding: 50%;
+    width: 90em;
+    margin: 0 0 0 21%;
+    transform: translateY(0px) ;
+    background: radial-gradient(50% 50% at 50% 50%, #467B33 22.3%, #39616D 76.88%, #374349 84.04%)
+}
+ */
+
+h3#scroll-text {
+    position: absolute;
+    height: 40px;
+    left: 0px;
+    color: #A0AAAC;
+    overflow-y: hidden;
+    transform: rotate(89.19deg) translatex(60px);
 }
 
-div#suggestion-elipse {
-    height: auto;
-    margin-top: 10%;
-}
-
-div#box1 {
-    background: #F1B24A;
-}
-
-div#box2 {
-    background: #2B7A78;
-}
-
-div#box3 {
-    background: #448564;
-}
-
-.small-rounded {
-    background: #22748e;
-    /*     border-radius: 16; */
-    padding: 5em;
-    border-radius: 58px;
-    width: min-content;
-    margin-bottom:10%;
-}
-
-.text-box.rounded {
-    background: #F1B24A;
-    width: auto;
+.text-box {
+    border: dashed;
+    width: 30%;
+    padding: 5%;
+    top: 55vh;
+    /* left: 30px; */
     position: relative;
-    left: 9em;
-    bottom: -8em;
+    /* transform: translate3d(-87%, -6%, 10px); */
+    background: #EBBD10;
+    right: -90vh;
 }
 
-img {
+
+.text-box-rounded {
+    /* border: dashed; */
     width: 100%;
-    max-height: 100%;
-    overflow-y:hidden;
+    padding: 5%;
+    border-radius: 25px;
+    background: #EBBD10;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 }
 
-.text-box.other {
-    background: #9DC88D;
-    width: fit-content;
-    height: fit-content;
+.box {
+    /* border: dashed; */
+    width: 30%;
+    padding: 5%;
+}
+.rounded{
+        border-radius: 25px;
+
 }
 
-.text-box.accent {
+.info-text-box{
+/*     margin: 22.5vh 10vh 0 0; */
+    margin: 0 0 0 9px;
     position: relative;
-    transform: translate3d(0%, -153%, 10px);
+    width: 45vh;
+    height: 70%;
+    padding: 2em;
+    background: #448564;
+    transform: translate3d(21%, 0%, 10px);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);  
+}
+.stats-text{
+    position: relative;
+    transform: translatey(-320px);
+    right: -55%;
+    padding: 10px;
+    width: 45vh;
+    height: auto;
     overflow-y: hidden;
 }
 
-div#shape1 {
-    position: relative;
-    top:0;
+
+
+
+
+
+input.form-control {
+    margin-top: 6em;
 }
 
-div#shape2 {
+.rounded-text-box{
+    margin-left:10 px;
+    background: #EBBD10;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 58px;
+    padding: 5%;
+    height: fit-content;
+    right: 2%;
     position: absolute;
-    transform: translate3d(0px, 0px, 0px);
+    transform: translateY(20em);
+    height: fit-content;
 }
 
-div#elispse4 {
-    background: #9DC88D;
-    position: absolute;
-    right: 0;
-}
 
-.progress-container {
-  width: 100%;
-  height: 8px;3
-  background: #ccc;
-}
 
-.progress-bar {
-  height: 8px;
-  background: #04AA6D;
-  width: 0%;
-}
-/* .progressBar {
-    width: 100%;
-    //max-width: 800px;
-    height: 4px;
-    margin: 0 0 10px 0;
+
+
+.button-main{
+    padding: 10px 20px;
+    margin:20%:
     position: relative;
-    display: inline-block;
-    background-color: rgba(255,255,255,.8);
+    width: auto;
+    height: 47px;
+    border-color:#448564;
+    color:#fff;
+    background: #448564; 
+    overflow-y:hidden;
 }
-   */
+
+a.button-main:hover{
+    background: #374349; 
+
+}
+
+
+
+
+
+
+
+.small-text-box{
+    padding:7%;
+    margin-top:10%;
+/*     margin-left:3%; */
+/*     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 58px; */
+}
+
+#box1{
+    left:0; 
+    background: #EBBD10;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 58px;
+}
+
+#box2{
+    left:33%;
+    background: #39616D;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 58px;
+}
+
+#box3{
+    right:0%;
+    background: #448564;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 58px;
+}
+
+
+
+
+
