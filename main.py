@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, flash, redirect,request
+from flask import Flask, render_template, url_for, flash, redirect, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from turbo_flask import Turbo
@@ -27,8 +27,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-login_manager = LoginManager()
-login_manager.init_app(app)
+login_manager = LoginManager(app)
+# login_manager.init_app(app)
+login_manager.login_view = "login"
+login_manager.login_message_category = 'info'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
 
 class User(db.Model):
     """An admin user capable of viewing reports.
@@ -43,13 +50,15 @@ class User(db.Model):
     password = db.Column(db.String(60), nullable=False)
     authenticated = db.Column(db.Boolean, default=False)
 
+    posts = db.relationship('Posts', backref='author', lazy=True)
+
     def is_active(self):
         """True, all users are active."""
         return True
 
     def get_id(self):
         """Return the email address to satisfy Flask-Login's requirements."""
-        return self.email
+        return self.username
 
     def is_authenticated(self):
         """Return True if the user is authenticated."""
@@ -62,21 +71,22 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
-
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255))
+    title = db.Column(db.String(100))
     content = db.Column(db.Text)
     date_posted = db.Column(db.DateTime,default=datetime.utcnow)
+    user_id = db.Column(db.String(20), db.ForeignKey('user.username'), nullable=False)
+
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.date_posted}')"
     
 # basic homepage, to be edited as needed with layout.html and main.css
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template('home.html')
+
 # add more pages as needed
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -134,6 +144,7 @@ def suggestions():
 @app.route("/community")
 def community():
     return render_template("community.html")
+
 
 # create post feature
 @app.route("/create", methods=['GET', 'POST'])

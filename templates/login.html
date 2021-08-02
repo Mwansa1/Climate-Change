@@ -1,12 +1,42 @@
+
 {% extends "layout.html" %}
 {% block content %}
+    <title>Login</title>
     <div class="body">
+        
         <div id="circle">
+            <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="col-md-6 offset-md-2">
             <h1>Login</h1>
-            <h2>Username: </h2>
-            <h2>Password: </h2>
-            <a href="#"><button class="button">login</button></a>
-
+            <h2>{{ form.username.label(class="form-control-label") }} </h2>
+            
+     {% if form.username.errors %}
+       {{ form.username(class="form-control form-control-lg is-invalid ") }}
+       <div class="invalid-feedback">
+         {% for error in form.username.errors%}
+             <span>{{error}}</span>
+         {% endfor %}
+       </div>
+   {% else %}
+       {{ form.username(class="form-control form-control-lg") }}
+   {% endif %}</div>
+   <div class="col-md-6 offset-md-2">
+            <h2>{{ form.password.label(class="form-control-label") }}</h2>
+         {% if form.password.errors %}
+           {{ form.password(class="form-control form-control-lg is-invalid") }}
+           <div class="invalid-feedback">
+             {% for error in form.password.errors%}
+                 <span>{{error}}</span>
+             {% endfor %}
+           </div>
+       {% else %}
+           {{ form.password(class="form-control form-control-lg") }}
+       {% endif %}
+       {{ form.submit(class="button") }}
+       </div>
+ </form>
         </div>
+       
     </div>
 {% endblock content %}
