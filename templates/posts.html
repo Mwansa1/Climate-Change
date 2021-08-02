@@ -3,16 +3,29 @@
     <title> Post </title>
     <h2>{{ subtitle }}</h2>
     <p>{{ text }}</p> 
-{% for post in posts %} 
-<article class="media content-section">
-    <div class="media-body">
-     <div class="article-metadata">
-        {{ post.author.username }}
-        <small class="text-muted">{{ post.date_posted.strftime('%M-%d-%y') }}</small>
+    <div class="row" data-masonry='{"percentPosition": true }' style="position: relative; height: 1044px;">
+
+        {% for post in posts %}
+        <div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">
+          <div class="card bg-primary text-white text-center p-3">
+            <figure class="mb-0">
+                <h2>{{ post.title}}</h2>
+              <blockquote class="blockquote">
+                <p>{{post.content}}</p>
+              </blockquote>
+              <figcaption class="blockquote-footer mb-0 text-white">
+                {{ post.author.username }}
+                <small >{{ post.date_posted.strftime('%m-%d-%y') }}</small>
+                {% if current_user.username == post.author.username %}
+                <small><a class="article-title" href='{{ url_for('post', id=post.id) }}'>Edit Options</a></small>
+                {%endif%}
+              </figcaption>
+            </figure>
+          </div>
         </div>
-        <h2><a class="article-title" href='{{ url_for('post', id=post.id) }}'> {{ post.title}}</a> </h2>
-        <p class="article-content">{{post.content}}</p>
-        </div>
-   </article>
+
+    
+
 {% endfor %} 
+
 {% endblock content %}

@@ -17,11 +17,19 @@ from flask_migrate import Migrate
 from blog import PostForm
 from datetime import datetime
 
+import os
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = '/path/to/the/uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+
 # import statements from prev projects, add/remove as needed
 app = Flask(__name__)
 turbo = Turbo(app)
 bcrypt = Bcrypt(app)
 
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SECRET_KEY'] = '525901fece4e62b2eb11fa3c1a302835'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
@@ -71,6 +79,7 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
+
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
@@ -80,12 +89,14 @@ class Posts(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
-    
+
+
 # basic homepage, to be edited as needed with layout.html and main.css
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template('home.html')
+
 
 # add more pages as needed
 @app.route("/register", methods=['GET', 'POST'])
@@ -169,11 +180,14 @@ def createpost():
                            text='Welcome to Climate Change project!',
                            title='Blog' , legend='New Post')
 
+
 # displays post based on the id provided
 @app.route('/posts/<int:id>')
+@login_required
 def post(id):
     post = Posts.query.get_or_404(id)
     return render_template('post.html', post=post)
+
 
 # displays all post in descending order
 @app.route('/posts')
@@ -183,6 +197,7 @@ def posts():
                            posts=posts,
                            text='Lets make some change')
  
+
 # gives user the option to update there posts
 @app.route("/post/<int:id>/update", methods=['GET', 'POST'])
 @login_required
@@ -225,6 +240,38 @@ def search_by_city():
     print(data)
     return render_template("home.html", data=data) 
  
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('download_file', name=filename))
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+    '''
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
