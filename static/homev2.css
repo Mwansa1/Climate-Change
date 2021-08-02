@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@500&display=swap');
+
+/* Home page stuff 
+ =====================
+*/
+h1 {
+    font-size: 8.5em;
+}
+
+h1#info-text {
+    font-size: 5.3em;
+}
+
+#r {
+    text-align: left;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    position: absolute;
+    height: 40px;
+    left: 0px;
+    color: #A0AAAC;
+    overflow-y: hidden;
+    transform: rotate(89.19deg) translatex(60px);
+}
+
+section {
+    overflow-y: hidden;
+    padding: 4rem 0;
+    height: min(90%, 70.5rem);
+}
+
+.cont {
+    margin-inline: auto;
+    width: min(90%, 70.5rem);
+    overflow-y: hidden
+}
+
+.text-box {
+    /* border: dashed; */
+    width: 30%;
+    padding: 5%;
+}
+
+.accent {
+    background: #EBBD10;
+}
+
+.rounded {
+    border-radius: 25px;
+}
+
+.split {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+}
+
+.vertical{
+    margin:10%;
+}
+
+@media (min-width: 57em) {
+    .split {
+        flex-direction: row;
+    }
+
+    .split>* {
+        flex-basis: 100%;
+    }
+
+    .split>*+* {
+        margin-left: 2em;
+    }
+
+    h1 {
+        font-size: 5.3em;
+    }
+
+    h2 {
+        font-size: 3em;
+    }
+
+    .text-box.accent {
+        position: relative;
+        transform: translate3d(0%, -253%, 10px);
+        overflow-y: hidden;
+    }
+    
+
+    
+    
+}
+
+.planet {
+    width: 90%;
+    height: 90%;
+    overflow-y: hidden;
+    position: relative;
+    right: 0;
+    transform: translatey(10px);
+}
+
+/* .planet{
+    height: 90%;
+    width: 90%;
+    margin: 0 0 0 21%;
+    transform: translateY(0px);
+    overflow-y: hidden;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1000;
+    background: radial-gradient(50% 50% at 50% 50%, #467B33 22.3%, #39616D 76.88%, #374349 84.04%)
+} */
+
+/* .elipse {
+    height: 25em;
+    width: 25em;
+    border-radius: 50%;
+    padding: 7.20em;
+    background: #39616D;
+    text-align: center;
+    overflow-y: hidden;
+
+}
+ */
+
+.circle{
+    width: 100px;
+    height: 100px;
+     border-radius: 50%;
+}
+.elipse {
+    height: 50%;
+    width: 50%;
+    border-radius: 50%;
+    padding: 9.2em;
+    background: #39616D;
+    text-align: center;
+    overflow-y: hidden;
+    /* background: #fff; */
+} 
+
+
+div#elipse1 {
+    background: #2B7A78;
+    height: auto;
+    width: 100%;
+}
+
+div#elispse2 {
+    background: #9DC88D;
+    position: absolute;
+    right: 0;
+}
+
+div#elipse3{
+    background: #2B7A78;
+
+}
+
+div#suggestion-elipse {
+    height: auto;
+    margin-top: 10%;
+}
+
+div#box1 {
+    background: #F1B24A;
+}
+
+div#box2 {
+    background: #2B7A78;
+}
+
+div#box3 {
+    background: #448564;
+}
+
+.small-rounded {
+    background: #22748e;
+    /*     border-radius: 16; */
+    padding: 5em;
+    border-radius: 58px;
+    width: min-content;
+    margin-bottom:10%;
+}
+
+.text-box.rounded {
+    background: #F1B24A;
+    width: auto;
+    position: relative;
+    left: 9em;
+    bottom: -8em;
+}
+
+img {
+    width: 100%;
+    max-height: 100%;
+    overflow-y:hidden;
+}
+
+.text-box.other {
+    background: #9DC88D;
+    width: fit-content;
+    height: fit-content;
+}
+
+.text-box.accent {
+    position: relative;
+    transform: translate3d(0%, -153%, 10px);
+    overflow-y: hidden;
+}
+
+div#shape1 {
+    position: relative;
+    top:0;
+}
+
+div#shape2 {
+    position: absolute;
+    transform: translate3d(0px, 0px, 0px);
+}
+
+div#elispse4 {
+    background: #9DC88D;
+    position: absolute;
+    right: 0;
+}
+
+.progress-container {
+  width: 100%;
+  height: 8px;3
+  background: #ccc;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #04AA6D;
+  width: 0%;
+}
+/* .progressBar {
+    width: 100%;
+    //max-width: 800px;
+    height: 4px;
+    margin: 0 0 10px 0;
+    position: relative;
+    display: inline-block;
+    background-color: rgba(255,255,255,.8);
+}
+   */
