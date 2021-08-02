@@ -5,8 +5,11 @@
         
         <div class="planet" id="planet-img"> </div>
         <div class="text-box">
-            <h1 id="stats-text">Stats</h1>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            <h1 id="stats-text">Welcome to GreenBook!</h1>
+            <p> GreenBook is the next big thing in social 
+                media - like Facebook, but sustainably focused!
+                Learn more about climate change and what you can
+                do to help by signing up today!</p>
         </div>
         
         <script type="text/javascript">
@@ -34,7 +37,11 @@
             <div>    
                 <h1>Information</h1>
                 <div class="info-text-box">
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    <p>Create an account,
+                        search for sustainable suggestions, and choose your favorites!
+                        Post about your green goals and view others' achievements in the community!
+                        If you can't get enough, check out our resources, with information on climate
+                        change and how to advocate for sustainability on a global scale!</p>
                 </div>
             </div>
                 
@@ -78,7 +85,7 @@
                 <h1>Climate Stats</h1>
                 <h2>Enter a City</h2>
                 <form action="{{url_for('search_by_city')}}" method="POST" role="form">
-                    <input name="city" type="text" pattern="[A-Za-z?.!, ]{1,30}" class="form-control" placeholder="Enter a City." title=" Enter only letters and . ? !,maximum of 30 characters  e.g Hi!">
+                    <input name="city" type="text" pattern="[A-Za-z?.!, ]{1,30}" class="form-control" placeholder="Enter a city..." title=" Enter only letters and . ? !,maximum of 30 characters  e.g Hi!">
                 </form>
             </div>
             <div>
