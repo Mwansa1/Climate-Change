@@ -1,0 +1,143 @@
+{% extends "layout.html" %} {% block content %} 
+
+
+<section class="section1">
+<!--  Home section    -->
+    <div class="cont">
+        <h3 id='scroll-text'>Scroll Down</h3>
+        
+        <div class="planet">
+            <img src="static/planet2.png" id="planet-img">
+        </div>
+        
+        <div class="text-box accent">
+            <h2>Stats</h2>
+            <p>Text</p>
+        </div>
+        <script type="text/javascript">
+            let earth = document.getElementById('planet-img');
+            let text = document.getElementById('scroll-text');
+    //         var navbar = document.getElementById("navbar");
+    //         var sticky = navbar.offsetTop;
+            window.addEventListener('scroll', function() {
+                var value= window.scrollY;
+//                 console.log(value);
+//                 if(window.pageYOffset >= sticky) {
+//                     navbar.classList.add("sticky")
+//                 } else {
+//                     navbar.classList.remove("sticky");
+//                 }
+                earth.style.transform = 'translateY(' + value * 0.25 + 'px)'; 
+                text.style.transform = 'rotate(89.19deg) translatex(' + value * 1.25 + 'px)';
+//                 earth.style.top = value *0.5 + 'px';
+            })
+        </script>
+    </div>
+</section>
+
+<!-- Information section -->
+<section>
+    <div class="cont">
+        <div class="split">
+            <div> 
+                <h1 id="info-text">Information</h1>
+                <div class="text-box other"> <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sollicitudin, risus vitae ultricies lobortis, </p></div>
+            </div>
+            <div>
+                <h2>Statistics</h2>
+                <p>Suspendisse congue nisl id quam convallis, ut blandit elit venenatis. 
+                    Donec a placerat dolor. Duis vel varius elit. Praesent velit metus, lobortis eu imperdiet a, luctus at libero</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="cont">
+        <div class="text-box rounded" id="shape1"> </div>
+        <div class="text-box accent" id="shape2"> </div>
+        <div class="elipse" id="elipse4"> </div>
+        <div class="elipse" id="elipse3"> </div>
+
+    </div>
+    
+    <script type="text/javascript">
+            let shape1 = document.getElementById('shape1');
+            let shape2 = document.getElementById('shape2');
+    //         var navbar = document.getElementById("navbar");
+    //         var sticky = navbar.offsetTop;
+            window.addEventListener('scroll', function() {
+                var value= window.scrollY;
+                shape1.style.transform = 'translateY(' + value * .85 + 'px)'; //0.25
+                shape2.style.transform = 'translateY(' + value * .55 + 'px)';//0.15
+//                 earth.style.top = value *0.5 + 'px';
+            })
+    </script>
+</section>
+
+<!-- Climate Stats section -->
+<section>
+    <div class="cont">
+        <div class="split">
+            <div>
+                <h1>Climate Stats</h1>
+                <p>Enter a Zipcode</p>
+                <form action="{{url_for('search_by_city')}}" method="POST" role="form">
+                            <input name="city" type="text" pattern="[A-Za-z?.!, ]{1,30}" class="form-control" placeholder="Enter a City." title=" Enter only letters and . ? !,maximum of 30 characters  e.g Hi!">
+                 </form>            
+            </div>
+            <div>
+                <div class="text-box rounded">
+                    <img src="static/barchart.png" alt="barchart carbon emissions">
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+<!-- More section -->
+<section>
+    <div class="cont">
+        <div class="split">    
+            <div>
+                <h1> More</h1>
+                <div class="elipse" id="elipse1">
+                <h2>Join the community</h2>
+                <a href="#"><button> Start</button></a>
+                </div>
+            </div> 
+
+            <div>
+                <div class="elipse" id="elispse2">
+                <h2>Get Personalized Suggestions</h2>
+                <a href="/suggestions"><button> Start</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Resources Section  -->
+<section>
+    <div class="cont">
+        
+        <h1 id="r">Resources</h1>
+        <div class="split">
+               <div class="small-rounded text-box" id="box1">
+                   <h2>Resource 1</h2>
+                </div>
+            
+                <div class="small-rounded text-box" id= "box2">
+                     <h2>Resource 2</h2>
+
+                </div>
+            
+                <div class="small-rounded text-box" id="box3">
+                     <h2>Resource 1</h2>
+    
+                </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

@@ -36,6 +36,7 @@ login_manager.login_message_category = 'info'
 def load_user(user_id):
     return User.query.get(user_id)
 
+
 class User(db.Model):
     """An admin user capable of viewing reports.
     :param str username: username of user
@@ -48,6 +49,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     authenticated = db.Column(db.Boolean, default=False)
+
     posts = db.relationship('Posts', backref='author', lazy=True)
 
     def is_active(self):
@@ -134,6 +136,15 @@ def logout():
     return redirect(url_for('home'))
 # @app.route("/more")
 # def second_page():
+
+@app.route("/suggestions")
+def suggestions():
+    return render_template("suggestions.html")
+
+@app.route("/community")
+def community():
+    return render_template("community.html")
+
 
 # create post feature
 @app.route("/create", methods=['GET', 'POST'])
