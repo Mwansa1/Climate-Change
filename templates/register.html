@@ -1,7 +1,11 @@
-{% extends "layout.html" %} {% block content %} 
-<div class="body">
-    <div id="circle">
+
+{% extends "layout.html" %} {% block content %}
 <!--     <div class="content-section"> -->
+<div class="cont">
+
+    <div class="body">
+        <div id="circle">
+            <h1 id="register-header">Register</h1>
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
@@ -26,6 +30,8 @@
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
         </form>
-<!--     </div> -->
     </div>
-</div> {% endblock content %}
+</div>
+    
+     </div> 
+{% endblock content %}
