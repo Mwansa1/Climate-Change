@@ -90,12 +90,8 @@ label.form-control-label {
     font-family:'Source Serif Pro', serif;
     font-size: 1.8em;
 }
-
 fieldset {
-    min-width: 0;
-    padding: 0;
     margin: 0% 30% 0% 15%;
-    border: 0;
 }
 
 form {
@@ -107,7 +103,8 @@ form#login-form {
 }
 
 input.form-control {
-    margin-top: .5em;
+    margin-top: .25em;
+    margin-bottom: .25em;
 }
 
 h1#register-header{
