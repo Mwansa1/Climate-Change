@@ -32,6 +32,14 @@ h1, h2, h3, h4, h5, h6, p, label{
     line-height: 1.6;
 }
 
+/* container for the logo */
+.navbar-brand{
+    width: 100px;
+    height: 100px;
+    overflow-y: hidden;
+    
+}
+
 a.nav-item.nav-link, a.navbar-brand.mr-4 {
 /*     font-family: "Muslih"; */
     font-family:'Source Serif Pro', serif;
@@ -116,6 +124,7 @@ h1#register-header{
   border-radius: 50%;
   text-align: center;
   color:white;
+  overflow-y:hidden;
 }
 
 
@@ -143,9 +152,9 @@ h1#register-header{
 }
 
 .content-section {
-  background: #ffffff;
+/*   background: #ffffff; */
   padding: 10px 20px;
-  border: 1px solid #dddddd;
+/*   border: 1px solid #dddddd; */
   border-radius: 3px;
   margin-bottom: 20px;
 }
