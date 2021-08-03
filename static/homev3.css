@@ -251,10 +251,6 @@ a.button-main:hover{
 /*     border-radius: 58px; */
 }
 
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
 
 /* Dropdown button */
 .dropdown .dropbtn {
