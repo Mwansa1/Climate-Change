@@ -108,11 +108,11 @@ h1#register-header{
 #circle {
 height: 100%;
   width: 100%;
+    padding: 30px;
   background: #3C675F;
   border-radius: 50%;
   text-align: center;
   color:white;
-  overflow-y:hidden;
 }
 
 
