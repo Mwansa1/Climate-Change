@@ -18,16 +18,14 @@ from flask_migrate import Migrate
 from blog import PostForm
 from datetime import datetime
 
-<<<<<<< HEAD
 import pandas as pd
-=======
+
 import os
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = './static/files'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
->>>>>>> blog
 
 # import statements from prev projects, add/remove as needed
 app = Flask(__name__)
@@ -96,7 +94,6 @@ class Posts(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
-<<<<<<< HEAD
     
 class FoodSuggestion(db.Model):
     __tablename__ = 'food_suggestion'
@@ -122,10 +119,6 @@ class EnergySuggestion(db.Model):
     def __repr__(self):
         return f"EnergySuggestion('{self.id}', '{self.content}')"
     
-=======
-
-
->>>>>>> blog
 # basic homepage, to be edited as needed with layout.html and main.css
 @app.route("/")
 @app.route("/home")
