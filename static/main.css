@@ -54,6 +54,7 @@ p {
     color: white;
     font-size: 1.5em;
 }
+
 img, svg {
     vertical-align: middle;
     width: 100%
@@ -115,6 +116,7 @@ h1#register-header{
   border-radius: 50%;
   text-align: center;
   color:white;
+  overflow-y:hidden;
 }
 
 
@@ -142,9 +144,9 @@ h1#register-header{
 }
 
 .content-section {
-  background: #ffffff;
+/*   background: #ffffff; */
   padding: 10px 20px;
-  border: 1px solid #dddddd;
+/*   border: 1px solid #dddddd; */
   border-radius: 3px;
   margin-bottom: 20px;
 }
@@ -195,6 +197,7 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+
 
 .sticky {
   position: fixed;
