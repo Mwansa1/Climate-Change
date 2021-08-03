@@ -17,7 +17,6 @@ body {
     text-align:center;
     /* margin-top: -5px; */
     
-  
 }
 
 
@@ -28,13 +27,6 @@ h1, h2, h3, h4, h5, h6, p, label{
     line-height: 1.6;
 }
 
-/* container for the logo */
-.navbar-brand{
-    width: 100px;
-    height: 100px;
-    overflow-y: hidden;
-    
-}
 
 a.nav-item.nav-link, a.navbar-brand.mr-4 {
 /*     font-family: "Muslih"; */
@@ -74,11 +66,6 @@ img, svg {
 /* Login/ register page stuff 
  =====================
 */
-@media (min-width: 57em) {
-    #circle {
-        width: 100%;
-        height: 760px;
-    }
     
 }
 .body{
@@ -216,6 +203,7 @@ a.article-title:hover {
 .modal .modal-dialog .modal-content{  background-color: white; }
 
 a {
+    color: white;
   text-decoration: none;
 }
 
