@@ -293,7 +293,7 @@ def createpost():
     return render_template('create.html',
                            form=form,
                            text='Welcome to Climate Change project!',
-                           title='Blog' , legend='New Post')
+                           title='Blog' , legend='Create Post')
 
 
 # displays post based on the id provided
@@ -309,7 +309,7 @@ def posts():
     posts = Posts.query.order_by(Posts.date_posted.desc())
     return render_template('posts.html',
                            posts=posts,
-                           text='Lets make some change')
+                           text='Share your sustainability journey!')
  
 
 # gives user the option to update there posts

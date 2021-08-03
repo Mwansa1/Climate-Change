@@ -23,37 +23,7 @@ h2 {
     overflow-y: hidden;
 }
 
-@media (min-width: 57em) {
-    .split {
-        flex-direction: row;
-    }
 
-    .split>* {
-        flex-basis: 100%;
-    }
-
-    .split>*+* {
-        margin-left: 2em;
-    }
-
-/*     h1 {
-        font-size: 5.3em;
-    }
-
-    h2 {
-        font-size: 3em;
-    }
- */
-    .text-box.accent {
-        position: relative;
-        transform: translate3d(0%, -253%, 10px);
-        overflow-y: hidden;
-    }
-    
-
-    
-    
-}
 
 
 section {
@@ -119,14 +89,16 @@ h3#scroll-text {
 }
 
 .text-box {
+    right: 0px;
+    width: 100%;
+    
     border: dashed;
-    width: 50%;
     height: 40em;
+    align-content: center;
     padding: 5%;
     top: 50vh;
     position: relative;
     /* transform: translate3d(-87%, -6%, 10px); */
-    right: -60vh;
     background: #EBBD10;
 }
 
@@ -151,10 +123,9 @@ h3#scroll-text {
 }
 
 .info-text-box{
-/*     margin: 22.5vh 10vh 0 0; */
     position: relative;
     margin-left: 40px;
-    width: 34vw;
+    width: 90%;
     height: 48em;
     padding: 2em;
     overflow-y: hidden;
@@ -220,8 +191,8 @@ a.button-main:hover{
 
 
 .small-text-box{
-    padding:7%;
-    margin-top:10%;
+    padding:5%;
+    margin-top:8%;
 /*     margin-left:3%; */
 /*     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 58px; */
@@ -250,23 +221,9 @@ a.button-main:hover{
 
 /*     border-radius: 58px; */
 }
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
 
-/* Dropdown button */
-.dropdown .dropbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
-}
 
+<<<<<<< HEAD
 /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
   background-color: gray;
@@ -291,16 +248,48 @@ a.button-main:hover{
   display: block;
   text-align: left;
 }
+=======
+>>>>>>> 8cf068c49930405a8ae118dff13f258cdd158908
 
-/* Add a grey background color to dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #ddd;
+@media (min-width: 57em) {
+    .split {
+        flex-direction: row;
+    }
+
+    .split>* {
+        flex-basis: 100%;
+    }
+
+    .split>*+* {
+        margin-left: 2em;
+    }
+
+/*     h1 {
+        font-size: 5.3em;
+    }
+
+    h2 {
+        font-size: 3em;
+    }
+ */
+    .text-box.accent {
+        position: relative;
+        transform: translate3d(0%, -253%, 10px);
+        overflow-y: hidden;
+    }
+    
+     .text-box {
+        border: dashed;
+        width: 50%;
+        height: 40em;
+        align-content: center;
+        padding: 5%;
+        top: 50vh;
+        position: relative;
+        /* transform: translate3d(-87%, -6%, 10px); */
+        right: -43vw;
+        background: #EBBD10;
+        }
+    
+    
 }
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-
-

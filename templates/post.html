@@ -1,47 +1,37 @@
-{% extends "layout.html" %}
-{% block content %} 
-
-<title> Post </title>
-
-    <div class="col-sm-6 col-lg-6 mb-4" style="position: absolute; left: 25%; top: 25%;">
-        <div class="card post-bg1 text-center p-3">
-            <figure class="mb-0">
-                <h2>{{ post.title}}</h2>
-                <blockquote class="blockquote">
-                    <p>{{post.content}}</p>
-                </blockquote>
-                <figcaption class="blockquote-footer text-white mb-0">
-                    {{ post.author.username }}
-                    <small> posted on {{ post.date_posted.strftime('%m/%d/%y') }}</small>
-                </figcaption>
-                {% if current_user == post.author %}
-                <a class="btn btn-secondary btn-sm mt-3 mb-1" href="{{ url_for('update_post', id=post.id) }}">Update</a>
-                <button type="button" class="btn btn-danger mt-3 btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete</button> </br>
-                <a class="btn btn-secondary mt-2 mb-1" href='{{ url_for('posts', id=post.id) }}'> Back to Feed</a>   
-                 <!-- Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
+{% extends "layout.html" %} {% block content %} <title> Post </title>
+<div class="col-sm-6 col-lg-6 mb-4" style="position: absolute; left: 25%; top: 25%;">
+    <div class="card post-bg1 text-center p-3">
+        <figure class="mb-0">
+            <h2>{{ post.title}}</h2>
+            <blockquote class="blockquote text-white">
+                {{post.content}}
+            </blockquote>
+            <figcaption class="blockquote-footer text-white mb-0">
+                {{ post.author.username }}
+                <small> posted on {{ post.date_posted.strftime('%m/%d/%y') }}</small>
+            </figcaption> {% if current_user == post.author %} <a class="btn btn-secondary btn-sm mt-3 mb-1" href="{{ url_for('update_post', id=post.id) }}">Update</a>
+            <button type="button" class="btn btn-danger mt-3 btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete</button>
+            <br>
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-dark" id="deleteModalLabel">Delete Post?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this post? This action can not be undone.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <form method="POST" action="{{ url_for('delete_post', id=post.id) }}">
+                                <input class="btn btn-danger" type="submit" value="Delete">
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p>Are you sure? This can not be undone.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form method="POST" action="{{ url_for('delete_post', id=post.id) }}">
-                         <input class="btn btn-danger" type="submit" value="Delete">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>  
-                {%endif%}
-                
-            </figure>
-        </div>
- 
-{% endblock content %}
+            </div> {%endif%} <a class="btn btn-secondary mt-2 mb-1" href='{{ url_for('posts', id=post.id) }}'> Back to Feed</a>
+        </figure>
+    </div> {% endblock content %}
