@@ -18,6 +18,8 @@ from flask_migrate import Migrate
 from blog import PostForm
 from datetime import datetime
 
+import pandas as pd
+
 # import statements from prev projects, add/remove as needed
 app = Flask(__name__)
 turbo = Turbo(app)
@@ -243,10 +245,22 @@ def suggestions():
     
     return render_template("suggestions.html", form=form)
 
-@app.route("/community")
-def community():
-    return render_template("community.html")
-
+# unfinished - need to save suggestions to user before it can read from a table
+@app.route("/list")
+@login_required
+def show_user_list():
+    try:
+        suggestions = pd.read_sql_table(current_user,get_id, con=db.engine)
+    except ValueError:
+        flash(f'No suggestions added to your list yet!', 'success')
+        return redirect(url_for('home'))
+    else:
+        user_list = []
+        for index, row in suggestions.iterrows():
+            user_list.append(row)
+        return render_template('list.html',
+                               subtitle='My Suggestions List',
+                               data=user_list, stringme=strshort)
 
 # create post feature
 @app.route("/create", methods=['GET', 'POST'])
