@@ -1,8 +1,10 @@
 {% extends "layout.html" %} {% block content %}
 <!--     <div class="content-section"> -->
-<title>Register</title>
+<div class="cont">
+
     <div class="body">
         <div id="circle">
+            <h1 id="register-header">Register</h1>
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
@@ -29,5 +31,6 @@
         </form>
     </div>
 </div>
-<!--      </div> --> 
+    
+     </div> 
 {% endblock content %}

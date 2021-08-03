@@ -1,15 +1,16 @@
 
 {% extends "layout.html" %}
 {% block content %}
+<div class="cont">
     <title>Login</title>
     <div class="body">
     
         <div id="circle">
-            <form method="POST" action="">
+            <form method="POST" action="" id="login-form">
             {{ form.hidden_tag() }}
             <div class="col-md-6 offset-md-2">
             <h1>Login</h1>
-            <h2>{{ form.username.label(class="form-control-label") }} </h2>
+            {{ form.username.label(class="form-control-label") }} 
             
      {% if form.username.errors %}
        {{ form.username(class="form-control form-control-lg is-invalid ") }}
@@ -22,7 +23,7 @@
        {{ form.username(class="form-control form-control-lg") }}
    {% endif %}</div>
    <div class="col-md-6 offset-md-2">
-            <h2>{{ form.password.label(class="form-control-label") }}</h2>
+           {{ form.password.label(class="form-control-label") }}
          {% if form.password.errors %}
            {{ form.password(class="form-control form-control-lg is-invalid") }}
            <div class="invalid-feedback">
@@ -39,4 +40,5 @@
         </div>
        
     </div>
+</div>
 {% endblock content %}
