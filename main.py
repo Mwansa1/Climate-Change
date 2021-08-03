@@ -347,13 +347,16 @@ def delete_post(id):
     # return render_template('posts.html', post=post)
     return redirect(url_for('posts'))
 
+@app.route("/weather")
+def weather():
+    return render_template("weather.html")
 
 @app.route("/search_by_city", methods=["POST"])
 def search_by_city():
     city = request.form["city"]
     data = search(city)
     print(data)
-    return render_template("home.html", data=data) 
+    return render_template("weather.html", data=data) 
  
 
 def allowed_file(filename):
