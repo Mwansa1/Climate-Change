@@ -1,15 +1,11 @@
-
-{% extends "layout.html" %} {% block content %}
-<!--     <div class="content-section"> -->
-<div class="cont">
-
-    <div class="body">
+{% extends "layout.html" %} {% block content %} <div class="content-section col-md-6 offset-md-3">
+<title>Register</title>
         <div id="circle">
-            <h1 id="register-header">Register</h1>
-        <form method="POST" action="">
+        <form method="POST" action="" id="login-form">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <div class="form-group">
+                    <h1>Register</h1>
                     {{ form.username.label(class="form-control-label") }} {% if form.username.errors %} {{ form.username(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback"> {% for error in form.username.errors%} <span>{{error}}</span> {% endfor %} </div> {% else %} {{ form.username(class="form-control form-control-lg") }} {% endif %}
                 </div>

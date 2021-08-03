@@ -90,16 +90,11 @@ label.form-control-label {
     font-family:'Source Serif Pro', serif;
     font-size: 1.8em;
 }
-fieldset {
-    margin: 0% 30% 0% 15%;
-}
 
-form {
-    margin: 5% 0% 20% 11%;
-}
+
 
 form#login-form {
-    margin: 30% 0% 20% 11%;
+    margin: 20%;
 }
 
 input.form-control {
@@ -111,8 +106,8 @@ h1#register-header{
     position: relative;
 }
 #circle {
+height: 100%;
   width: 100%;
-  height: 50em;
   background: #3C675F;
   border-radius: 50%;
   text-align: center;
@@ -218,7 +213,7 @@ a.article-title:hover {
 .post-bg3{
   background-color:#EBBD10;
 }
-.modal .modal-dialog .modal-content{  background-color: #EBBD10; }
+.modal .modal-dialog .modal-content{  background-color: white; }
 
 a {
   text-decoration: none;
