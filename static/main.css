@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@500&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@500&display=swap');
+ */
 
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@600&display=swap');
 
 /* li a:hover:not(.active) {
   background-color: #111;
@@ -23,10 +25,17 @@ body {
 }
 
 
-h1, h2, h3, h4, h5, h6, p{
+h1, h2, h3, h4, h5, h6, p, label{
     color: #fff;
-    font-family:"Muslih" , sans-serif;
+/*     font-family:"Muslih" , sans-serif; */
+    font-family:'Source Serif Pro', serif;
     line-height: 1.6;
+}
+
+a.nav-item.nav-link, a.navbar-brand.mr-4 {
+/*     font-family: "Muslih"; */
+    font-family:'Source Serif Pro', serif;
+
 }
 
 section{
@@ -48,10 +57,8 @@ p {
 
 img, svg {
     vertical-align: middle;
-    width: 100%;
-    /* height: 100%; */
+    width: 100%
 }
-
 .container{
      width: 100%;   
      height: auto;
@@ -60,29 +67,71 @@ img, svg {
 }
 
 
-/* Login page stuff 
+/* Login/ register page stuff 
  =====================
 */
+@media (min-width: 57em) {
+    #circle {
+        width: 100%;
+        height: 760px;
+    }
+    
+}
 .body{
     padding:20%;
 }
 
+
+label.form-control-label {
+    font-family: "Muslih";
+    font-size: 1.8em;
+}
+
+fieldset {
+    min-width: 0;
+    padding: 0;
+    margin: 0% 30% 0% 15%;
+    border: 0;
+}
+
+form {
+    margin: 5% 0% 20% 11%;
+}
+
+form#login-form {
+    margin: 30% 0% 20% 11%;
+}
+
+input.form-control {
+    margin-top: 2em;
+}
+
+h1#register-header{
+    position: relative;
+}
 #circle {
-  width: 50em;
+  width: 100%;
   height: 50em;
   background: #3C675F;
   border-radius: 50%;
   text-align: center;
+  color:white;
 }
-  
 
-/* Header stuff */
+
+
+
+/* Header stuff 
+ ==================
+*/
 .bg-steel {
    background-color: rgba(0,0,0,0.5); 
 }
 
 .site-header .navbar-nav .nav-link {
   color: #cbd5db;
+  font-family:'Source Serif Pro', serif;
+    
 }
 
 .site-header .navbar-nav .nav-link:hover {
