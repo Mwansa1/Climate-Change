@@ -20,7 +20,7 @@ from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = '/path/to/the/uploads'
+UPLOAD_FOLDER = './static/files'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
@@ -188,7 +188,6 @@ def post(id):
     post = Posts.query.get_or_404(id)
     return render_template('post.html', post=post)
 
-
 # displays all post in descending order
 @app.route('/posts')
 def posts():
@@ -199,7 +198,7 @@ def posts():
  
 
 # gives user the option to update there posts
-@app.route("/post/<int:id>/update", methods=['GET', 'POST'])
+@app.route("/posts/<int:id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(id):
     # insures the user is fixing there post and not anyone else
@@ -212,7 +211,7 @@ def update_post(id):
         post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
-        return redirect(url_for('post', id=post.id))
+        return redirect(url_for('posts', id=post.id))
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content
@@ -220,17 +219,18 @@ def update_post(id):
                            form=form, legend='Update Post')
 
 
-@app.route("/post/<int:id>/delete", methods=['POST'])
+@app.route("/posts/<int:id>/delete", methods=['POST'])
 @login_required
 def delete_post(id):
     post = Posts.query.get_or_404(id)
     # insures the user is fixing there post and not anyone else
-    if post.author != current_user:
+    if current_user != post.author :
         abort(403)
     db.session.delete(post)
     db.session.commit()
     flash('Your post has been deleted!', 'success')
-    return redirect(url_for('home'))
+    # return render_template('posts.html', post=post)
+    return redirect(url_for('posts'))
 
 
 @app.route("/search_by_city", methods=["POST"])

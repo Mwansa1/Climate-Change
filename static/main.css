@@ -151,3 +151,21 @@ a.article-title:hover {
 .sticky + .content {
   padding-top: 60px;
 }
+.post-bg1{
+  background-color:#39616D;
+}
+.post-bg2{
+  background-color:#448564;
+}
+.post-bg3{
+  background-color:#EBBD10;
+}
+.modal .modal-dialog .modal-content{  background-color: #EBBD10; }
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
