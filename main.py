@@ -293,7 +293,7 @@ def createpost():
     return render_template('create.html',
                            form=form,
                            text='Welcome to Climate Change project!',
-                           title='Blog' , legend='New Post')
+                           title='Blog' , legend='Create Post')
 
 
 # displays post based on the id provided
