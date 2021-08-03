@@ -23,37 +23,7 @@ h2 {
     overflow-y: hidden;
 }
 
-@media (min-width: 57em) {
-    .split {
-        flex-direction: row;
-    }
 
-    .split>* {
-        flex-basis: 100%;
-    }
-
-    .split>*+* {
-        margin-left: 2em;
-    }
-
-/*     h1 {
-        font-size: 5.3em;
-    }
-
-    h2 {
-        font-size: 3em;
-    }
- */
-    .text-box.accent {
-        position: relative;
-        transform: translate3d(0%, -253%, 10px);
-        overflow-y: hidden;
-    }
-    
-
-    
-    
-}
 
 
 section {
@@ -119,14 +89,16 @@ h3#scroll-text {
 }
 
 .text-box {
+    right: 0px;
+    width: 100%;
+    
     border: dashed;
-    width: 50%;
     height: 40em;
+    align-content: center;
     padding: 5%;
     top: 50vh;
     position: relative;
     /* transform: translate3d(-87%, -6%, 10px); */
-    right: -60vh;
     background: #EBBD10;
 }
 
@@ -151,10 +123,9 @@ h3#scroll-text {
 }
 
 .info-text-box{
-/*     margin: 22.5vh 10vh 0 0; */
     position: relative;
     margin-left: 40px;
-    width: 34vw;
+    width: 90%;
     height: 48em;
     padding: 2em;
     overflow-y: hidden;
@@ -305,3 +276,45 @@ a.button-main:hover{
 
 
 
+@media (min-width: 57em) {
+    .split {
+        flex-direction: row;
+    }
+
+    .split>* {
+        flex-basis: 100%;
+    }
+
+    .split>*+* {
+        margin-left: 2em;
+    }
+
+/*     h1 {
+        font-size: 5.3em;
+    }
+
+    h2 {
+        font-size: 3em;
+    }
+ */
+    .text-box.accent {
+        position: relative;
+        transform: translate3d(0%, -253%, 10px);
+        overflow-y: hidden;
+    }
+    
+     .text-box {
+        border: dashed;
+        width: 50%;
+        height: 40em;
+        align-content: center;
+        padding: 5%;
+        top: 50vh;
+        position: relative;
+        /* transform: translate3d(-87%, -6%, 10px); */
+        right: -43vw;
+        background: #EBBD10;
+        }
+    
+    
+}
