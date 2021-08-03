@@ -1,18 +1,60 @@
 {% extends "layout.html" %}
 {% block content %} 
-    <title> Post </title>
+    <title> Feed </title>
     <h2>{{ subtitle }}</h2>
     <p>{{ text }}</p> 
-{% for post in posts %} 
-<article class="media content-section">
-    <div class="media-body">
-     <div class="article-metadata">
-        {{ post.author.username }}
-        <small class="text-muted">{{ post.date_posted.strftime('%M-%d-%y') }}</small>
+
+    <div class="row" data-masonry='{"percentPosition": true }' style="position: relative; height: 1044px;">
+
+        {% for post in posts %}
+        {% if post.id % 3 == 0 %}
+        <div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">
+          <div class="card post-bg3 text-center p-3">
+            <figure class="mb-0">
+                <a href='{{ url_for('post', id=post.id) }}'> <h2>{{ post.title}}</h2></a>
+              <blockquote class="blockquote">
+                <p>{{post.content}}</p>
+              </blockquote>
+              <figcaption class="blockquote-footer text-white mb-0">
+                {{ post.author.username }}
+                <small> posted on {{ post.date_posted.strftime('%m/%d/%y') }}</small>
+              </figcaption>
+            </figure>
+          </div>
         </div>
-        <h2><a class="article-title" href='{{ url_for('post', id=post.id) }}'> {{ post.title}}</a> </h2>
-        <p class="article-content">{{post.content}}</p>
+        {% elif post.id % 2 == 0 %}
+        <div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">
+          <div class="card post-bg1 text-center p-3">
+            <figure class="mb-0">
+                <a href='{{ url_for('post', id=post.id) }}'> <h2>{{ post.title}}</h2></a>
+              <blockquote class="blockquote">
+                <p>{{post.content}}</p>
+              </blockquote>
+              <figcaption class="blockquote-footer text-white mb-0">
+                {{ post.author.username }}
+                <small> posted on {{ post.date_posted.strftime('%m/%d/%y') }}</small>
+              </figcaption>
+            </figure>
+          </div>
         </div>
-   </article>
-{% endfor %} 
+        {% else %}
+        <div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 50%; top: 0px;">
+          <div class="card post-bg2 text-center p-3">
+            <figure class="mb-0">
+                <a href='{{ url_for('post', id=post.id) }}'> <h2>{{ post.title}}</h2></a>
+              <blockquote class="blockquote">
+                <p>{{post.content}}</p>
+              </blockquote>
+              <figcaption class="blockquote-footer text-white mb-0">
+                {{ post.author.username }}
+                <small> posted on {{ post.date_posted.strftime('%m/%d/%y') }}</small>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        {%endif%}
+    {% endfor %}
+  </div>
+   
+  
 {% endblock content %}

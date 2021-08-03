@@ -18,11 +18,21 @@ from flask_migrate import Migrate
 from blog import PostForm
 from datetime import datetime
 
+import pandas as pd
+
+import os
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = './static/files'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+
 # import statements from prev projects, add/remove as needed
 app = Flask(__name__)
 turbo = Turbo(app)
 bcrypt = Bcrypt(app)
 
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SECRET_KEY'] = '525901fece4e62b2eb11fa3c1a302835'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
@@ -74,6 +84,7 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
+
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
@@ -113,6 +124,7 @@ class EnergySuggestion(db.Model):
 @app.route("/home")
 def home():
     return render_template('home.html')
+
 
 # add more pages as needed
 @app.route("/register", methods=['GET', 'POST'])
@@ -243,10 +255,22 @@ def suggestions():
     
     return render_template("suggestions.html", form=form)
 
-@app.route("/community")
-def community():
-    return render_template("community.html")
-
+# unfinished - need to save suggestions to user before it can read from a table
+@app.route("/list")
+@login_required
+def show_user_list():
+    try:
+        suggestions = pd.read_sql_table(current_user,get_id, con=db.engine)
+    except ValueError:
+        flash(f'No suggestions added to your list yet!', 'success')
+        return redirect(url_for('home'))
+    else:
+        user_list = []
+        for index, row in suggestions.iterrows():
+            user_list.append(row)
+        return render_template('list.html',
+                               subtitle='My Suggestions List',
+                               data=user_list, stringme=strshort)
 
 # create post feature
 @app.route("/create", methods=['GET', 'POST'])
@@ -271,8 +295,10 @@ def createpost():
                            text='Welcome to Climate Change project!',
                            title='Blog' , legend='New Post')
 
+
 # displays post based on the id provided
 @app.route('/posts/<int:id>')
+@login_required
 def post(id):
     post = Posts.query.get_or_404(id)
     return render_template('post.html', post=post)
@@ -285,8 +311,9 @@ def posts():
                            posts=posts,
                            text='Lets make some change')
  
+
 # gives user the option to update there posts
-@app.route("/post/<int:id>/update", methods=['GET', 'POST'])
+@app.route("/posts/<int:id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(id):
     # insures the user is fixing there post and not anyone else
@@ -299,7 +326,7 @@ def update_post(id):
         post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
-        return redirect(url_for('post', id=post.id))
+        return redirect(url_for('posts', id=post.id))
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content
@@ -307,17 +334,18 @@ def update_post(id):
                            form=form, legend='Update Post')
 
 
-@app.route("/post/<int:id>/delete", methods=['POST'])
+@app.route("/posts/<int:id>/delete", methods=['POST'])
 @login_required
 def delete_post(id):
     post = Posts.query.get_or_404(id)
     # insures the user is fixing there post and not anyone else
-    if post.author != current_user:
+    if current_user != post.author :
         abort(403)
     db.session.delete(post)
     db.session.commit()
     flash('Your post has been deleted!', 'success')
-    return redirect(url_for('home'))
+    # return render_template('posts.html', post=post)
+    return redirect(url_for('posts'))
 
 
 @app.route("/search_by_city", methods=["POST"])
@@ -327,6 +355,38 @@ def search_by_city():
     print(data)
     return render_template("home.html", data=data) 
  
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('download_file', name=filename))
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+    '''
+
 
 if __name__ == '__main__':
     db.create_all()
