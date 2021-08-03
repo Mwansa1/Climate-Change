@@ -244,6 +244,7 @@ a.button-main:hover{
 }
 
 #box3{
+    text-align:left;
     right:0%;
     background: #448564;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -269,7 +270,7 @@ a.button-main:hover{
 
 /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
+  background-color: #ddd;
 }
 
 /* Dropdown content (hidden by default) */
