@@ -12,7 +12,6 @@ flask_sqlalchemy
 turbo-flask
 requests
 pandas
-os
 flask-migrate
 pytest
 pycodestyle
