@@ -15,16 +15,17 @@ from flask_login import LoginManager, UserMixin, login_required, \
     login_user, logout_user, current_user
 
 from flask_migrate import Migrate
-from blog import PostForm
+from blog import PostForm, UploadForm
 from datetime import datetime
 
 import pandas as pd
-
+import secrets
 import os
 from werkzeug.utils import secure_filename
+from PIL import Image
 
 UPLOAD_FOLDER = './static/files'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+# ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
 # import statements from prev projects, add/remove as needed
@@ -62,8 +63,8 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     authenticated = db.Column(db.Boolean, default=False)
-
     posts = db.relationship('Posts', backref='author', lazy=True)
+    uploads = db.relationship('Uploads', backref='author', lazy=True)
 
     def is_active(self):
         """True, all users are active."""
@@ -94,6 +95,18 @@ class Posts(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+    
+class Uploads(db.Model):
+    
+    __tablename__ = 'uploads'
+    id = db.Column(db.Integer, primary_key=True)
+    image_file = db.Column(db.String(30), nullable=False)
+    caption = db.Column(db.String(100))
+    user_id = db.Column(db.String(20), db.ForeignKey('user.username'), nullable=False)
+    date_posted = db.Column(db.DateTime,default=datetime.utcnow)
+    
+    def __repr__(self):
+        return f"Post('{self.image_file}', '{self.date_posted}')"
     
 class FoodSuggestion(db.Model):
     __tablename__ = 'food_suggestion'
@@ -303,14 +316,23 @@ def post(id):
     post = Posts.query.get_or_404(id)
     return render_template('post.html', post=post)
 
+# displays post based on the id provided
+@app.route('/uploads/<int:id>')
+@login_required
+def uploadtoPost(id):
+    upload = Uploads.query.get_or_404(id)
+    return render_template('post.html', upload=upload)
+
 # displays all post in descending order
 @app.route('/posts')
 def posts():
+    uploads = Uploads.query.order_by(Uploads.date_posted.desc())
     posts = Posts.query.order_by(Posts.date_posted.desc())
     return render_template('posts.html',
                            posts=posts,
+                           uploads=uploads,
                            text='Share your sustainability journey!')
- 
+
 
 # gives user the option to update there posts
 @app.route("/posts/<int:id>/update", methods=['GET', 'POST'])
@@ -358,37 +380,34 @@ def search_by_city():
     print(data)
     return render_template("weather.html", data=data) 
  
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, UPLOAD_FOLDER, picture_fn)
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    output_size = (125, 125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_fn
+
+                            
 
 @app.route('/upload', methods=['GET', 'POST'])
+@login_required
 def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('download_file', name=filename))
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
+    form = UploadForm()
+    if form.validate_on_submit():
+        if form.image.data:
+            picture_file = save_picture(form.image.data)
+        upload = Uploads(image_file=url_for('static', filename='files/' + picture_file), caption=form.caption.data, author=current_user)
+        db.session.add(upload)
+        db.session.commit()
+        flash('Blog Post added', 'success')
+        return redirect(url_for('posts'))
+    return render_template('upload.html', form=form)
 
 
 if __name__ == '__main__':
