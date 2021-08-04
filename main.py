@@ -395,7 +395,6 @@ def save_picture(form_picture):
     i.save(picture_path)
 
     return picture_fn
-
                             
 
 @app.route('/upload', methods=['GET', 'POST'])
