@@ -1,4 +1,5 @@
 {% extends "layout.html" %} {% block content %} 
+<title> Home</title>
 <section class="section1">
     <div class="cont">
         <h3 id="scroll-text">Scroll Down...</h3>
@@ -47,7 +48,17 @@
                 
             <div >
                 <h2> Statistics</h2>
-                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                <p>Unless we cut 7% of carbon emissions,
+                    there will be a 1.5 to 5 degrees Celsius rise
+                    in global average temperature by 2100 and a 34 cm rise in sea levels by 2050.</p>
+                <li>The current concentration of carbon dioxide in the atmosphere is the highest in human history: 416 parts per million.</li>
+                <li>2019 was the second warmest year on record - the five warmest have all been since 2015.</li>
+                <li>11% of emissions are caused by deforestation.</li>
+                <p>What does all of this mean? We can do something about climate change!
+                    GreenBook offers resources to get started living a more sustainable life,
+                    as well as advocating for green solutions to climate change at the local,
+                    national, and global levels.</p>
+                <caption href="https://www.conservation.org/stories/11-climate-change-facts-you-need-to-know">Source: conservation.org</caption>
             </div>
                 
         </div>
@@ -82,7 +93,7 @@
     <div class="cont">
         <div class="split">
             <div>
-                <h1>Climate Stats</h1>
+                <h1>City Weather Forcast</h1>
                 <h2>Enter a City</h2>
                 <form action="{{url_for('search_by_city')}}" method="POST" role="form">
                     <input name="city" type="text" pattern="[A-Za-z?.!, ]{1,30}" class="form-control" placeholder="Enter a city..." title=" Enter only letters and . ? !,maximum of 30 characters  e.g Hi!">
