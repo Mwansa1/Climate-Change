@@ -1,4 +1,4 @@
-name: Test 
+name: Tests 
 on: push
 
 jobs:
@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+
       - name: Setup python
         uses: actions/setup-python@v2
         with:
@@ -30,7 +32,4 @@ jobs:
      - name:  Test webpages
         run: |
           python3 testing/page_loading_tests.py
-
-     - name:  Test user login/register
-        run: |
           python3 testing/test_users.py
