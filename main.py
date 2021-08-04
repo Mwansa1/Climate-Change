@@ -132,6 +132,9 @@ class EnergySuggestion(db.Model):
     def __repr__(self):
         return f"EnergySuggestion('{self.id}', '{self.content}')"
     
+# class SavedSuggestions()
+
+
 # basic homepage, to be edited as needed with layout.html and main.css
 @app.route("/")
 @app.route("/home")
