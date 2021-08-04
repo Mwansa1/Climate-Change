@@ -1,8 +1,7 @@
 {% extends "layout.html" %} {% block content %} <title> Feed </title>
-<h2>{{ subtitle }}</h2>
-<p>{{ text }}</p>
-<a class="btn btn-outline-light mt-2 mb-4 btn-lg" href='/create'> Create Post </a>
-<a class="btn btn-outline-light mt-2 mb-4 btn-lg" href='/upload'> Upload Image </a>
+<h2>{{ text }}</h2>
+<a class="btn btn-outline-light mt-2 mb-4 btn-lg" id='change' href='/create'> Create Post </a>
+<a class="btn btn-outline-light mt-2 mb-4 btn-lg" id='change' href='/upload'> Upload Image </a>
 <div class="row" data-masonry='{"percentPosition": true }' style="position: relative; height: 1044px;"> 
     {% for post in posts %} 
     {% if post.id % 3 == 0 %} <div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">
