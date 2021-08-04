@@ -236,9 +236,7 @@ a.article-title:hover {
     background-color: white;
 }
 
-a {
-  color:black;
-}
+
 a#change {
   color:white;
   text-decoration: none;
