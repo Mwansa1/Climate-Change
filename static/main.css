@@ -72,6 +72,10 @@ section {
     justify-content: center;
 }
 
+section.line {
+    text-align:center;
+}
+
 p {
     text-align:left;
     margin-top: 0;
@@ -232,12 +236,8 @@ a.article-title:hover {
     background-color: white;
 }
 
-/* a {
-    color:black;
-  text-decoration: none;
-<<<<<<< HEAD
-} */
-=======
+a {
+  color:black;
 }
 a#change {
   color:white;
@@ -247,7 +247,6 @@ a:hover#change {
     color: black;
     text-decoration: none;
 }
->>>>>>> 6524d4093db985522c633745b49d2a4dbb5116cc
 
 a:visited {
     color:black;

@@ -25,6 +25,8 @@ import os
 from werkzeug.utils import secure_filename
 from PIL import Image
 
+from suggestions import food_suggestions, travel_suggestions, energy_suggestions
+
 UPLOAD_FOLDER = './static/files'
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
@@ -53,6 +55,10 @@ login_manager.login_message_category = 'info'
 def load_user(user_id):
     return User.query.get(user_id)
 
+def create_table():
+    query = text("""CREATE TABLE IF NOT EXISTS ' {} ' (
+    suggestion STRING)""".format(str(current_user.get_id())))
+    db.engine.execute(query)
 
 class User(db.Model):
     """An admin user capable of viewing reports.
@@ -74,7 +80,7 @@ class User(db.Model):
         return True
 
     def get_id(self):
-        """Return the email address to satisfy Flask-Login's requirements."""
+        """Return the username to satisfy Flask-Login's requirements."""
         return self.username
 
     def is_authenticated(self):
@@ -147,6 +153,35 @@ class EnergySuggestion(db.Model):
 
 # class SavedSuggestions()
 
+def populate_suggestions():
+    # populate food suggestion table
+    for fs in food_suggestions:
+        suggestion = FoodSuggestion(id=fs['id'], content=fs['content'])
+        try:
+            db.session.add(suggestion)
+            db.session.commit()
+        except exc.IntegrityError:
+            db.session.rollback()
+    
+    # populate travel suggestion table
+    for ts in travel_suggestions:
+        suggestion = TravelSuggestion(id=ts['id'], content=ts['content'])
+        try:
+            db.session.add(suggestion)
+            db.session.commit()
+        except exc.IntegrityError:
+            db.session.rollback()
+            
+    # populate energy suggestion table
+    for es in energy_suggestions:
+        suggestion = EnergySuggestion(id=es['id'], content=es['content'])
+        try:
+            db.session.add(suggestion)
+            db.session.commit()
+        except exc.IntegrityError:
+            db.session.rollback()
+
+populate_suggestions()
 
 # basic homepage, to be edited as needed with layout.html and main.css
 @app.route("/")
@@ -210,97 +245,41 @@ def logout():
     return redirect(url_for('home'))
 
 
+
 @app.route("/suggestions", methods=['GET', 'POST'])
 def suggestions_search():
-    # food suggestions
-    food_suggestions = [
-        {'id': 0, 'content': 'Avoid overly processed foods. These foods have a high carbon footprint due to manufacuring, traveling, and distribution.'},
-        {'id': 1, 'content': 'Buy locally made food, your carbon footprint will decrease as a result.'},
-        {'id': 2, 'content': 'Eat less red meat to reduce your carbon footprint.'},
-        {'id': 3, 'content': 'Buy fair trade products to reduce your carbon footprint.'},
-        {'id': 4, 'content': 'Grow your own food to save natural resources in mass production.'}
-    ]
-
-    travel_suggestions = [
-        {'id': 0, 'content': 'Ride a bike or walk to places that are close by instead of driving.'},
-        {'id': 1, 'content': 'Use public transportation instead of driving.'},
-        {'id': 2, 'content': 'Mitigate the negative impact of air travel by flying less often.'},
-        {'id': 3, 'content': 'Don’t speed! Gas mileage declines rapidly above 60 mph. Each 5 mph increase above 60 is like paying an additional 10 cents a gallon for gasoline.'},
-        {'id': 4, 'content': 'Drive hybrid or electric vehicles to reduce pollution from exhaust.'}
-    ]
-
-    energy_suggestions = [
-        {'id': 0, 'content': 'Unplug electronics you are not using to save energy.'},
-        {'id': 1, 'content': 'Replace your light bulb with LED ones, they save 75% more energy!'},
-        {'id': 2, 'content': 'Turn off the lights in rooms you are not in.'},
-        {'id': 3, 'content': 'Avoid turning on the light when you can use sunlight instead.'},
-        {'id': 4, 'content': 'Use dimmers in common areas of your house to save a significant amount of energy'}
-    ]
-
-    # populate food suggestion table
-    for fs in food_suggestions:
-        suggestion = FoodSuggestion(id=fs['id'], content=fs['content'])
-        try:
-            db.session.add(suggestion)
-            db.session.commit()
-        except exc.IntegrityError:
-            db.session.rollback()
-
-    # populate travel suggestion table
-    for ts in travel_suggestions:
-        suggestion = TravelSuggestion(id=ts['id'], content=ts['content'])
-        try:
-            db.session.add(suggestion)
-            db.session.commit()
-        except exc.IntegrityError:
-            db.session.rollback()
-
-    # populate energy suggestion table
-    for es in energy_suggestions:
-        suggestion = EnergySuggestion(id=es['id'], content=es['content'])
-        try:
-            db.session.add(suggestion)
-            db.session.commit()
-        except exc.IntegrityError:
-            db.session.rollback()
-
     # form for selecting suggestion type
     form = SuggestionForm()
     if form.validate_on_submit():
         suggestion = form.suggestion.data
-
-        # get relevant list of suggestions
-        suggestions = []
-
-        if form.suggestion.data == 'food_suggestion':
-            for i in range(5):
-                suggestions.append(FoodSuggestion.query.get(i).content)
-            return redirect(
-                url_for(
-                    'suggestionResults.html',
-                    suggestions=suggestions))
-
-        elif form.suggestion.data == 'travel_suggestion':
-            for i in range(5):
-                suggestions.append(TravelSuggestion.query.get(i).content)
-            return render_template(
-                'suggestionResults.html',
-                suggestions=suggestions)
-
-        elif form.suggestion.data == 'energy_suggestion':
-            for i in range(5):
-                suggestions.append(EnergySuggestion.query.get(i).content)
-            return render_template(
-                'suggestionResults.html',
-                suggestions=suggestions)
-
+        return redirect(url_for('suggestions_found', suggestions=suggestion))
     return render_template("suggestions.html", form=form)
 
 
 @app.route("/suggestions_found", methods=['GET', 'POST'])
 @login_required
 def suggestions_found():
-    return render_template('suggestionResults.html')
+    list = []
+    suggestion = request.args.get('suggestions', None)
+    if suggestion == 'food_suggestion':
+        for i in range(5):
+            list.append(FoodSuggestion.query.get(i).content)
+    elif suggestion == 'travel_suggestion':
+        for i in range(5):
+            list.append(TravelSuggestion.query.get(i).content)
+    elif suggestion == 'energy_suggestion':
+        for i in range(5):
+            list.append(EnergySuggestion.query.get(i).content)
+    df = pd.DataFrame.from_dict(list)
+    if request.method == 'POST':
+        index = request.form.getlist('suggestion')
+        selected = df.iloc[index]
+        create_table()
+        selected.to_sql(current_user.get_id(), con=db.engine, if_exists='append', index=False)
+        flash(f'Suggestions added!', 'success')
+        return redirect(url_for('home')) #change to my list once working
+        
+    return render_template('suggestionResults.html', suggestions=list)
 
 # unfinished - need to save suggestions to user before it can read from a table
 
@@ -309,7 +288,7 @@ def suggestions_found():
 @login_required
 def show_user_list():
     try:
-        suggestions = pd.read_sql_table(current_user, get_id, con=db.engine)
+        suggestions = pd.read_sql_table(current_user.get_id, con=db.engine)
     except ValueError:
         flash(f'No suggestions added to your list yet!', 'success')
         return redirect(url_for('home'))
@@ -319,7 +298,7 @@ def show_user_list():
             user_list.append(row)
         return render_template('list.html',
                                subtitle='My Suggestions List',
-                               data=user_list, stringme=strshort)
+                               data=user_list)
 
 # create post feature
 
