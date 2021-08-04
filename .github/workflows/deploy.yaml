@@ -1,4 +1,4 @@
-name: Test 
+name: Test and Deploy
 on: push
 
 jobs:
@@ -8,29 +8,18 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           git fetch --prune --unshallow
+          
       - name: Setup python
         uses: actions/setup-python@v2
         with:
           python-version: 3.6
 
-      - name: Install tools
+      - name: Install Dependencies
         run: |
-          python -m pip install --upgrade pip pytest
           python -m pip install --upgrade pip
           pip install pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip3 install flask
-          pip3 install flask-wtf
-          pip3 install flask-sqlalchemy
-          pip3 install email-validator
-          pip3 install flask-bcrypt
-          pip3 install turbo-flask
-          pip3 install requests
-          pip3 install sqlalchemy
-          pip3 install pandas
-          pip3 install flask-migrate
-          pip3 install matplotlab
-
+          
       - name: Lint with pycodestyle
         run: |
           pycodestyle --first *.py
@@ -39,15 +28,7 @@ jobs:
         run: |
           python3 -m pytest
 
-     - name:  Test webpages
-        run: |
-          python3 testing/page_loading_tests.py
-
-     - name:  Test user login/register
-        run: |
-          python3 testing/test_users.py
-
-     - name: Deploy to Heroku
+      - name: Deploy to Heroku
         env:
           HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}

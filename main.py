@@ -24,8 +24,10 @@ import secrets
 import os
 from werkzeug.utils import secure_filename
 from PIL import Image
+import random
 
-from suggestions import food_suggestions, travel_suggestions, energy_suggestions
+from suggestions import (
+    food_suggestions, travel_suggestions, energy_suggestions)
 
 UPLOAD_FOLDER = './static/files'
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -55,11 +57,13 @@ login_manager.login_message_category = 'info'
 def load_user(user_id):
     return User.query.get(user_id)
 
+
 def create_table():
     query = text("""CREATE TABLE IF NOT EXISTS ' {} ' (
     id STRING,
     suggestion STRING)""".format(str(current_user.get_id())))
     db.engine.execute(query)
+
 
 class User(db.Model):
     """An admin user capable of viewing reports.
@@ -165,6 +169,7 @@ class EnergySuggestion(db.Model):
 
 # class SavedSuggestions()
 
+
 def populate_suggestions():
     # populate food suggestion table
     for fs in food_suggestions:
@@ -174,7 +179,7 @@ def populate_suggestions():
             db.session.commit()
         except exc.IntegrityError:
             db.session.rollback()
-    
+
     # populate travel suggestion table
     for ts in travel_suggestions:
         suggestion = TravelSuggestion(id=ts['id'], content=ts['content'])
@@ -183,7 +188,7 @@ def populate_suggestions():
             db.session.commit()
         except exc.IntegrityError:
             db.session.rollback()
-            
+
     # populate energy suggestion table
     for es in energy_suggestions:
         suggestion = EnergySuggestion(id=es['id'], content=es['content'])
@@ -193,9 +198,12 @@ def populate_suggestions():
         except exc.IntegrityError:
             db.session.rollback()
 
+
 populate_suggestions()
 
 # basic homepage, to be edited as needed with layout.html and main.css
+
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -257,7 +265,6 @@ def logout():
     return redirect(url_for('home'))
 
 
-
 @app.route("/suggestions", methods=['GET', 'POST'])
 def suggestions_search():
     # form for selecting suggestion type
@@ -272,25 +279,41 @@ def suggestions_search():
 @login_required
 def suggestions_found():
     list = []
-    category = request.args.get('suggestions', None)
-    if category == 'food_suggestion':
+    # random number list, to be shuffled
+    random_num_list = [0, 1, 2, 3, 4, 5]
+    
+    suggestion = request.args.get('suggestions', None)
+    
+    if suggestion == 'food_suggestion':
+        random.shuffle(random_num_list)
         for i in range(5):
-            list.append(FoodSuggestion.query.get(i).content)
-    elif category == 'travel_suggestion':
+            random_num = random_num_list[i]
+            list.append(FoodSuggestion.query.get(random_num).content)
+            
+    elif suggestion == 'travel_suggestion':
+        random.shuffle(random_num_list)
         for i in range(5):
-            list.append(TravelSuggestion.query.get(i).content)
-    elif category == 'energy_suggestion':
+            random_num = random_num_list[i]
+            list.append(TravelSuggestion.query.get(random_num).content)
+            
+    elif suggestion == 'energy_suggestion':
+        random.shuffle(random_num_list)
         for i in range(5):
-            list.append(EnergySuggestion.query.get(i).content)
+            random_num = random_num_list[i]
+            list.append(EnergySuggestion.query.get(random_num).content)
     if request.method == 'POST':
         index = request.form.getlist('suggestion')
         selected = series.iloc[index]
         print(selected)
         create_table()
-        selected.to_sql(current_user.get_id(), con=db.engine, if_exists='append', index=False)
+        selected.to_sql(
+            current_user.get_id(),
+            con=db.engine,
+            if_exists='append',
+            index=False)
         flash(f'Suggestions added!', 'success')
-        return redirect(url_for('home')) #change to my list once working
-        
+        return redirect(url_for('home'))  # change to my list once working
+
     return render_template('suggestionResults.html', suggestions=list)
 
 # unfinished - need to save suggestions to user before it can read from a table
@@ -298,7 +321,7 @@ def suggestions_found():
 @login_required
 def show_user_list():
     try:
-        suggestions = pd.read_sql_table(current_user.get_id, con=db.engine)
+        suggestions = pd.read_sql_table(current_user.get_id(), con=db.engine)
     except ValueError:
         flash(f'No suggestions added to your list yet!', 'success')
         return redirect(url_for('home'))

@@ -20,16 +20,17 @@ jobs:
           pip3 install flask-wtf
           pip3 install flask-sqlalchemy
           pip3 install email-validator
+          pip3 install flask-login
           pip3 install flask-bcrypt
           pip3 install turbo-flask
           pip3 install requests
           pip3 install sqlalchemy
           pip3 install pandas
           pip3 install flask-migrate
-          pip3 install matplotlab
+          pip3 install matplotlib
           pip3 install datapackage
 
-     - name:  Test webpages
+      - name: Test webpages
         run: |
-          python3 testing/page_loading_tests.py
-          python3 testing/test_users.py
+            python3 testing/page_loading_tests.py
+            python3 testing/test_users.py
