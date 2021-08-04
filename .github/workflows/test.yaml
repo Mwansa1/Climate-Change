@@ -31,10 +31,7 @@ jobs:
           pip3 install flask-migrate
           pip3 install matlablib
 
-      - name: Test webpages
+      - name: Test webpages and users
         run: |
             python3 testing/page_loading_tests.py
-
-     - name: Test user login and register
-        run: |
             python3 testing/test_users.py
