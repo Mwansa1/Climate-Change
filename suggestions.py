@@ -6,7 +6,7 @@ food_suggestions = [
         {'id': 3, 'content': 'Buy fair trade products to reduce your carbon footprint.'},
         {'id': 4, 'content': 'Grow your own food to save natural resources in mass production.'}
     ]
-    
+
 travel_suggestions = [
         {'id': 0, 'content': 'Ride a bike or walk to places that are close by instead of driving.'},
         {'id': 1, 'content': 'Use public transportation instead of driving.'},
@@ -14,7 +14,7 @@ travel_suggestions = [
         {'id': 3, 'content': 'Don’t speed! Gas mileage declines rapidly above 60 mph. Each 5 mph increase above 60 is like paying an additional 10 cents a gallon for gasoline.'},
         {'id': 4, 'content': 'Drive hybrid or electric vehicles to reduce pollution from exhaust.'}
     ]
-    
+
 energy_suggestions = [
         {'id': 0, 'content': 'Unplug electronics you are not using to save energy.'},
         {'id': 1, 'content': 'Replace your light bulb with LED ones, they save 75% more energy!'},
