@@ -16,11 +16,21 @@ def search (city):
     # getting the main dict block
         main = data['main']
     # getting temperature
-        temperature = main['temp']
+        temp = main['temp']
+        temperature = (9/5*(temp-273)+32)
+        main['temp'] = float('{0:.2f}'.format(temperature))
     # getting the humidity
         humidity = main['humidity']
     # getting the pressure
         pressure = main['pressure']
+     # getting Max temperature
+        MaxTemp = main['temp_max']
+        maxTemp = (9/5*(MaxTemp-273)+32)
+        main['temp_max'] = float('{0:.2f}'.format(maxTemp))
+     # getting Min temperature
+        MinTemp = main['temp_min']
+        minTemp = (9/5*(MinTemp-273)+32)
+        main['temp_min'] = float('{0:.2f}'.format(minTemp))
     # weather report
         print(main)
 #         print(f"{CITY:-^30}")

@@ -132,6 +132,9 @@ class EnergySuggestion(db.Model):
     def __repr__(self):
         return f"EnergySuggestion('{self.id}', '{self.content}')"
     
+# class SavedSuggestions()
+
+
 # basic homepage, to be edited as needed with layout.html and main.css
 @app.route("/")
 @app.route("/home")
@@ -156,7 +159,7 @@ def register():
             flash(f'Username or email account already exists!', 'danger')
         else:
             flash(f'Account created for {form.username.data}!', 'success')
-            return redirect(url_for("home"))  # if so - send to home page
+            return redirect(url_for("login"))  # if so - send to login page
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -377,7 +380,7 @@ def weather():
 def search_by_city():
     city = request.form["city"]
     data = search(city)
-    print(data)
+#     print(data)
     return render_template("weather.html", data=data) 
  
 def save_picture(form_picture):
@@ -392,7 +395,6 @@ def save_picture(form_picture):
     i.save(picture_path)
 
     return picture_fn
-
                             
 
 @app.route('/upload', methods=['GET', 'POST'])
