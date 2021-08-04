@@ -23,7 +23,7 @@ jobs:
           pip3 install turbo-flask
           pip3 install weatherAPI
           pip3 install requests
-          pip3 instal forms
+          pip3 install forms
           pip3 install sqlalchemy
           pip3 install blog
           pip3 install pandas
@@ -35,6 +35,6 @@ jobs:
         run: |
             python3 testing/page_loading_tests.py
 
-     - name: Test user login/register
+     - name: Test user login and register
         run: |
             python3 testing/test_users.py
