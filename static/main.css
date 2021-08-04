@@ -30,11 +30,16 @@ h4,
 h5,
 h6,
 p,
-label {
+label, li{
     color: #fff;
     /*     font-family:"Muslih" , sans-serif; */
     font-family: 'Source Serif Pro', serif;
     line-height: 1.6;
+}
+
+li{
+/*     text-align:left; */
+    font-size:18px;
 }
 
 /* container for the logo */
