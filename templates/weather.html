@@ -1,23 +1,10 @@
 {% extends "layout.html" %}
-
-{% block weather %}
-
-
-
-<div>
-    <h1> Works.</h1>
-</div>
-<div class="col-lg mb-3">
-<div class="card">
-  <div class="card-body">
-     <h5 class="card-title">City weather search results</h5>
-      <p class="card-text">Temperature: {{main.temp}}</p>
-      <p class="card-text">Humidity: {{main.humidity}}</p>
-      <p class="card-text">Pressure: {{main.pressure}}</p>
-      <p class="card-text">:Max Temperature {{main.temp_max}}</p>
-      <p class="card-text">:Min Temperature {{main.temp_min}}</p>
-      <a href="{{url_for('search_by_city')}}" method="POST" role="form"></a>
-  </div>
-</div>
-</div>
-{% endblock %}
+{% block content %}
+    <h2>City Weather Forecast</h2>
+    <p>Temperature: {{data.temp}} K </p>
+      <p>Humidity: {{data.humidity}} %</p>
+      <p>Pressure:  {{data.pressure}} mb</p>
+      <p>Maximum Temperature: {{data.temp_max}} K </p>
+      <p>Minimum Temperature: {{data.temp_min}} K </p>
+      <a href="{{url_for('search_by_city')}}" method="POST" role="form">
+{% endblock content %}
