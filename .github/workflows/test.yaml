@@ -32,7 +32,4 @@ jobs:
      - name:  Test webpages
         run: |
           python3 testing/page_loading_tests.py
-
-     - name:  Test user login and register
-        run: |
           python3 testing/test_users.py
