@@ -27,24 +27,30 @@ jobs:
           pip3 install pandas
           pip3 install flask-migrate
           pip3 install matlablib
+
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
       - name: Lint with pycodestyle
         run: |
           pycodestyle --first *.py
+
       - name: Test with pytest
         run: |
           python3 -m pytest
+
      - name:  Test webpages and users
         run: |
           python3 testing/page_loading_tests.py
           python3 testing/test_users.py
+
      - name:  Test user login/register
         run: |
           python3 testing/test_users.py
+
      - name: Deploy to Heroku
         env:
           HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
