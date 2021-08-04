@@ -53,6 +53,7 @@ section{
 }
 
 p {
+    text-align:left;
     margin-top: 0;
     margin-bottom: 1rem;
     color: white;
@@ -216,15 +217,17 @@ a.article-title:hover {
 .modal .modal-dialog .modal-content{  background-color: white; }
 
 a {
+    color:black;
   text-decoration: none;
 }
 
 a:visited {
+    color:black;
   text-decoration: none;
 }
 
 a:hover {
-    color: black;
+    color: lightblue;
     text-decoration: none;
 }
 legend{
@@ -238,4 +241,6 @@ legend{
     margin: 0% 30% 0% 15%;
    
 }
+
+
 
