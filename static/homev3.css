@@ -26,6 +26,8 @@ h2 {
 }
 
 
+
+
 section {
     overflow-y: hidden;
     padding: 4rem 0;
@@ -65,16 +67,6 @@ div#elispse2 {
 
 
 
-/* .planet{
-    height: 100%;
-    padding: 50%;
-    width: 90em;
-    margin: 0 0 0 21%;
-    transform: translateY(0px) ;
-    background: radial-gradient(50% 50% at 50% 50%, #467B33 22.3%, #39616D 76.88%, #374349 84.04%)
-}
- */
-
 h1#stats-text {
     font-size: 4em;
 }
@@ -98,13 +90,11 @@ h3#scroll-text {
     padding: 5%;
     top: 50vh;
     position: relative;
-    /* transform: translate3d(-87%, -6%, 10px); */
     background: #EBBD10;
 }
 
 
 .text-box-rounded {
-    /* border: dashed; */
     width: 100%;
     padding: 5%;
     border-radius: 25px;
@@ -113,7 +103,6 @@ h3#scroll-text {
 }
 
 .box {
-    /* border: dashed; */
     width: 30%;
     padding: 5%;
 }
@@ -143,16 +132,6 @@ h3#scroll-text {
     overflow-y: hidden;
 }
 
-
-
-
-
-
-
-/* input.form-control {
-    margin-top: 6em;
-} */
-
 .rounded-text-box{
     margin-left:10 px;
     background: #EBBD10;
@@ -165,9 +144,6 @@ h3#scroll-text {
     transform: translateY(20em);
     height: fit-content;
 }
-
-
-
 
 
 .button-main{
@@ -193,17 +169,17 @@ a.button-main:hover{
 .small-text-box{
     padding:5%;
     margin-top:8%;
-/*     margin-left:3%; */
-/*     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 58px; */
+}
+
+.align-left {
+    text-align: left;
 }
 
 #box1{
     left:0; 
     background: #EBBD10;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-/*     border-radius: 58px; */
+    border-radius: 58px;
 }
 
 #box2{
@@ -211,15 +187,14 @@ a.button-main:hover{
     background: #39616D;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-/*     border-radius: 58px; */
+    border-radius: 58px;
 }
 
 #box3{
     right:0%;
     background: #448564;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-/*     border-radius: 58px; */
+    border-radius: 58px;
 }
 
 
@@ -276,16 +251,17 @@ a.button-main:hover{
     }
     
      .text-box {
-        border: dashed;
-        width: 50%;
-        height: 40em;
-        align-content: center;
-        padding: 5%;
-        top: 50vh;
-        position: relative;
-        /* transform: translate3d(-87%, -6%, 10px); */
-        right: -43vw;
-        background: #EBBD10;
+           border: dashed;
+            width: 45%;
+            height: 40em;
+            align-content: center;
+            padding: 5%;
+            top: 50vh;
+            position: relative;
+            /* transform: translate3d(-87%, -6%, 10px); */
+            right: -38vw;
+            overflow-x: hidden;
+            background: #EBBD10;
         }
     
     
