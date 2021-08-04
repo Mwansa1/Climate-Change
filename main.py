@@ -24,6 +24,7 @@ import secrets
 import os
 from werkzeug.utils import secure_filename
 from PIL import Image
+import random
 
 from suggestions import (
     food_suggestions, travel_suggestions, energy_suggestions)
@@ -266,16 +267,30 @@ def suggestions_search():
 @login_required
 def suggestions_found():
     list = []
+    
+    # random number list, to be shuffled
+    random_num_list = [0, 1, 2, 3, 4, 5]
+    
     suggestion = request.args.get('suggestions', None)
+    
     if suggestion == 'food_suggestion':
+        random.shuffle(random_num_list)
         for i in range(5):
-            list.append(FoodSuggestion.query.get(i).content)
+            random_num = random_num_list[i]
+            list.append(FoodSuggestion.query.get(random_num).content)
+            
     elif suggestion == 'travel_suggestion':
+        random.shuffle(random_num_list)
         for i in range(5):
-            list.append(TravelSuggestion.query.get(i).content)
+            random_num = random_num_list[i]
+            list.append(TravelSuggestion.query.get(random_num).content)
+            
     elif suggestion == 'energy_suggestion':
+        random.shuffle(random_num_list)
         for i in range(5):
-            list.append(EnergySuggestion.query.get(i).content)
+            random_num = random_num_list[i]
+            list.append(EnergySuggestion.query.get(random_num).content)
+            
     df = pd.DataFrame.from_dict(list)
     if request.method == 'POST':
         index = request.form.getlist('suggestion')
@@ -298,7 +313,7 @@ def suggestions_found():
 @login_required
 def show_user_list():
     try:
-        suggestions = pd.read_sql_table(current_user.get_id, con=db.engine)
+        suggestions = pd.read_sql_table(current_user.get_id(), con=db.engine)
     except ValueError:
         flash(f'No suggestions added to your list yet!', 'success')
         return redirect(url_for('home'))
