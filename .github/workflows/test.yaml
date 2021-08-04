@@ -24,7 +24,6 @@ jobs:
           pip3 install requests
           pip3 install sqlalchemy
           pip3 install pandas
-          pip3 install os
           pip3 install flask-migrate
           pip3 install matlablib
 
