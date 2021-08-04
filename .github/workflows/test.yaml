@@ -33,5 +33,5 @@ jobs:
       - name: Test webpages
         run: python3 testing/page_loading_test.py
         
-     - name: Test user login/register
+     - name: Test user login-register
         run: python3 testing/test_users.py
