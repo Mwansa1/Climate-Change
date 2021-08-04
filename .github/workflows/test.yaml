@@ -29,7 +29,7 @@ jobs:
           pip3 install matplotlib
           pip3 install datapackage
 
-     - name:  Test webpages
+      - name: Test webpages
         run: |
-          python3 testing/page_loading_tests.py
-          python3 testing/test_users.py
+            python3 testing/page_loading_tests.py
+            python3 testing/test_users.py
