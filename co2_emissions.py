@@ -14,6 +14,7 @@ x_col = 'Year'
 y_col = 'Annual Increase'
 title = 'Yearly Atmospheric Carbon Dioxide Rates'
 
+
 def get_info_to_df(sources):
     data = None
     for resource in sources:
@@ -27,4 +28,3 @@ def make_save_barchart():
     ax = df.plot.bar(x=x_col, y=y_col, title=title)
     fig = ax.get_figure()
     fig.savefig('static/barchart.png')
-
