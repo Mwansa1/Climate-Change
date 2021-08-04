@@ -1,10 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
+
     <h2>City Weather Forecast</h2>
-    <p>Temperature: {{data.temp}} °F </p>
-      <p>Humidity: {{data.humidity}} %</p>
-      <p>Pressure:  {{data.pressure}} mb</p>
-      <p>Maximum Temperature: {{data.temp_max}} °F </p>
-      <p>Minimum Temperature: {{data.temp_min}} °F </p>
-      <a href="{{url_for('search_by_city')}}" method="POST" role="form">
+<div class = "weather-container">
+    <p style="text-align:center">Temperature: {{data.temp}} °F </p>
+      <p style="text-align:center">Humidity: {{data.humidity}} %</p>
+      <p style="text-align:center">Pressure:  {{data.pressure}} mb</p>
+      <p style="text-align:center">Maximum Temperature: {{data.temp_max}} °F </p>
+      <p style="text-align:center">Minimum Temperature: {{data.temp_min}} °F </p>
+</div>
+      <a href="{{url_for('search_by_city')}}" method="POST" role="form">  
+
 {% endblock content %}
