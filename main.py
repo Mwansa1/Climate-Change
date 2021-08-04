@@ -100,6 +100,7 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
+
 class Suggestions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
@@ -110,7 +111,8 @@ class Suggestions(db.Model):
 
     def __repr__(self):
         return f"Suggestion('{self.content}')"
-    
+
+
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
@@ -274,28 +276,29 @@ def suggestions_search():
         return redirect(url_for('suggestions_found', suggestions=category))
     return render_template("suggestions.html", form=form)
 
+
 # not working rn
 @app.route("/suggestions_found", methods=['GET', 'POST'])
 @login_required
 def suggestions_found():
     list = []
-    # random number list, to be shuffled
+# random number list, to be shuffled
     random_num_list = [0, 1, 2, 3, 4, 5]
-    
+
     suggestion = request.args.get('suggestions', None)
-    
+
     if suggestion == 'food_suggestion':
         random.shuffle(random_num_list)
         for i in range(5):
             random_num = random_num_list[i]
             list.append(FoodSuggestion.query.get(random_num).content)
-            
+
     elif suggestion == 'travel_suggestion':
         random.shuffle(random_num_list)
         for i in range(5):
             random_num = random_num_list[i]
             list.append(TravelSuggestion.query.get(random_num).content)
-            
+
     elif suggestion == 'energy_suggestion':
         random.shuffle(random_num_list)
         for i in range(5):
@@ -315,6 +318,7 @@ def suggestions_found():
         return redirect(url_for('home'))  # change to my list once working
 
     return render_template('suggestionResults.html', suggestions=list)
+
 
 # unfinished - need to save suggestions to user before it can read from a table
 @app.route("/list")
@@ -368,6 +372,7 @@ def createpost():
 def post(id):
     post = Posts.query.get_or_404(id)
     return render_template('post.html', post=post)
+
 
 # displays post based on the id provided
 @app.route('/uploads/<int:id>')
