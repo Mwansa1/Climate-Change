@@ -1,10 +1,10 @@
 # greenbook
-*This software retrieves weather information from the Weather API*
+*This software retrieves weather information from the Weather API.*
 
 
-GreenBook, a website somewhat like Facebook, is the new social media platform that focuses on sustainability! 
-On our application, users can keep track of there sustainable actions and learn more about what they can do.
-With a sense of community, users feel more supported and are more welling to make more sustainable changes.
+GreenBook is the new social media platform that focuses on sustainability - like Facebook, but green! 
+On our application, users can keep track of their sustainable lifestyle goals and learn more about what they can do to advocate for our climate.
+With a sense of community, users feel more supported and are more willing to make sustainable changes.
 
 ## Badges
 ![example workflow](https://github.com/Mwansa1/Climate-Change/actions/workflows/style.yaml/badge.svg)
