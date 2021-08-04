@@ -26,7 +26,7 @@ jobs:
           pip3 install sqlalchemy
           pip3 install pandas
           pip3 install flask-migrate
-          pip3 install matplotlab
+          pip3 install matplotlib
           pip3 install datapackage
 
      - name:  Test webpages
