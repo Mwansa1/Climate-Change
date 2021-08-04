@@ -1,7 +1,7 @@
 from flask import Flask
 import unittest, sys
 
-sys.path.append('../QuickASL') # imports python file from parent directory
+sys.path.append('../Climate-Change') # imports python file from parent directory
 from main import app #imports flask app object
 
 class page_loading_tests(unittest.TestCase):
@@ -17,7 +17,9 @@ class page_loading_tests(unittest.TestCase):
         response = self.app.get('/home', follow_redirects=True)
         response2 = self.app.get('/', follow_redirects=True)
 
-        self.assertEqual(response.status_code and response2 , 200)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response2.status_code , 200)
+
         
         
     def test_register_page(self):
