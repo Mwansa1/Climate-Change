@@ -5,6 +5,13 @@
 /* li a:hover:not(.active) {
   background-color: #111;
 } */
+
+*{
+    box-sizing:border-box;
+/*     overflow-x:hidden; */
+}
+
+
 body {
     background-image: url('climate change.png');
     background-repeat: no-repeat;
@@ -30,6 +37,15 @@ label {
     line-height: 1.6;
 }
 
+/* container for the logo */
+.navbar-brand{
+    width: 100px;
+    height: 100px;
+    overflow-y: hidden;
+    overflow-x:hidden;
+    
+}
+
 a.nav-item.nav-link,
 a.navbar-brand.mr-4 {
     /*     font-family: "Muslih"; */
@@ -46,6 +62,7 @@ section {
 }
 
 p {
+    text-align:left;
     margin-top: 0;
     margin-bottom: 1rem;
     color: white;
@@ -68,7 +85,8 @@ svg {
 /* Login/ register page stuff 
  =====================
 */
-}
+
+
 
 .body {
     padding: 20%;
@@ -204,16 +222,17 @@ a.article-title:hover {
 }
 
 a {
-    color: white;
-    text-decoration: none;
+    color:black;
+  text-decoration: none;
 }
 
 a:visited {
-    text-decoration: none;
+    color:black;
+  text-decoration: none;
 }
 
 a:hover {
-    color: black;
+    color: lightblue;
     text-decoration: none;
 }
 
@@ -227,3 +246,4 @@ legend {
     min-width: 0;
     margin: 0% 30% 0% 15%;
 }
+

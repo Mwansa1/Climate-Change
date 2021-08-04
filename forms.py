@@ -18,14 +18,11 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
     
 class SuggestionForm(FlaskForm):
-    
     suggestion = SelectField(
         'Sustainable Suggestions',
         choices=[
             ('food_suggestion', 'Food'),
             ('travel_suggestion', 'Travel'),
             ('energy_suggestion', 'Energy')
-        ]
-    )
-    
+        ])
     submit = SubmitField('Submit')

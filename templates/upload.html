@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block content %} <title>Upload new File</title>
+<div class="content-section col-md-6 offset-md-3">
+    <h1> Upload an Image </h1>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="form-group">
+                {{ form.caption.label(class="form-control-label") }} {% if form.caption.errors %} {{ form.caption(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback"> {% for error in form.caption.errors %} <span>{{ error }}</span> {% endfor %} </div> {% else %} {{ form.caption(class="form-control form-control-lg") }} {% endif %}
+            </div>
+            <div class="input-group mb-3">
+                {{ form.image(class="form-control", id="inputGroupFile02") }}{% if form.image.errors %} {% for error in form.image.errors %}
+                <span class="text-danger">
+                {{ error }}</span> {% endfor %} {% endif %} 
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn mt-4 btn-outline-light") }}
+        </div>
+    </form>
+</div>{% endblock content %}

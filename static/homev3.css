@@ -9,6 +9,8 @@
 /* h1 {
     font-size: 8.5em;
 } */
+
+
 h1 {
         font-size: 3.5em;
     }
@@ -22,8 +24,6 @@ h2 {
     flex-direction: column;
     overflow-y: hidden;
 }
-
-
 
 
 section {
@@ -223,7 +223,6 @@ a.button-main:hover{
 }
 
 
-<<<<<<< HEAD
 /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
   background-color: gray;
@@ -248,8 +247,6 @@ a.button-main:hover{
   display: block;
   text-align: left;
 }
-=======
->>>>>>> 8cf068c49930405a8ae118dff13f258cdd158908
 
 @media (min-width: 57em) {
     .split {
