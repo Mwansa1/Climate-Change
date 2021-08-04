@@ -380,7 +380,7 @@ def weather():
 def search_by_city():
     city = request.form["city"]
     data = search(city)
-    print(data)
+#     print(data)
     return render_template("weather.html", data=data) 
  
 def save_picture(form_picture):
