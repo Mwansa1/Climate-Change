@@ -29,7 +29,7 @@ jobs:
           pip3 install sqlalchemy
           pip3 install pandas
           pip3 install flask-migrate
-          pip3 install matlablib
+          pip3 install matplotlab
 
       - name: Lint with pycodestyle
         run: |
