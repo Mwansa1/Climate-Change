@@ -57,6 +57,7 @@ def load_user(user_id):
 
 def create_table():
     query = text("""CREATE TABLE IF NOT EXISTS ' {} ' (
+    id STRING,
     suggestion STRING)""".format(str(current_user.get_id())))
     db.engine.execute(query)
 
@@ -74,6 +75,7 @@ class User(db.Model):
     authenticated = db.Column(db.Boolean, default=False)
     posts = db.relationship('Posts', backref='author', lazy=True)
     uploads = db.relationship('Uploads', backref='author', lazy=True)
+    suggestions = db.relationship('Suggestions', backref='author', lazy=True)
 
     def is_active(self):
         """True, all users are active."""
@@ -94,7 +96,17 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
+class Suggestions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+    user_id = db.Column(
+        db.String(20),
+        db.ForeignKey('user.username'),
+        nullable=False)
 
+    def __repr__(self):
+        return f"Suggestion('{self.content}')"
+    
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
@@ -251,29 +263,29 @@ def suggestions_search():
     # form for selecting suggestion type
     form = SuggestionForm()
     if form.validate_on_submit():
-        suggestion = form.suggestion.data
-        return redirect(url_for('suggestions_found', suggestions=suggestion))
+        category = form.suggestion.data
+        return redirect(url_for('suggestions_found', suggestions=category))
     return render_template("suggestions.html", form=form)
 
-
+# not working rn
 @app.route("/suggestions_found", methods=['GET', 'POST'])
 @login_required
 def suggestions_found():
     list = []
-    suggestion = request.args.get('suggestions', None)
-    if suggestion == 'food_suggestion':
+    category = request.args.get('suggestions', None)
+    if category == 'food_suggestion':
         for i in range(5):
             list.append(FoodSuggestion.query.get(i).content)
-    elif suggestion == 'travel_suggestion':
+    elif category == 'travel_suggestion':
         for i in range(5):
             list.append(TravelSuggestion.query.get(i).content)
-    elif suggestion == 'energy_suggestion':
+    elif category == 'energy_suggestion':
         for i in range(5):
             list.append(EnergySuggestion.query.get(i).content)
-    df = pd.DataFrame.from_dict(list)
     if request.method == 'POST':
         index = request.form.getlist('suggestion')
-        selected = df.iloc[index]
+        selected = series.iloc[index]
+        print(selected)
         create_table()
         selected.to_sql(current_user.get_id(), con=db.engine, if_exists='append', index=False)
         flash(f'Suggestions added!', 'success')
@@ -282,8 +294,6 @@ def suggestions_found():
     return render_template('suggestionResults.html', suggestions=list)
 
 # unfinished - need to save suggestions to user before it can read from a table
-
-
 @app.route("/list")
 @login_required
 def show_user_list():
@@ -337,8 +347,6 @@ def post(id):
     return render_template('post.html', post=post)
 
 # displays post based on the id provided
-
-
 @app.route('/uploads/<int:id>')
 @login_required
 def uploadtoPost(id):
@@ -361,7 +369,7 @@ def posts():
 @app.route("/posts/<int:id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(id):
-    # insures the user is fixing there post and not anyone else
+    # ensures the user is fixing their post and not anyone else
     post = Posts.query.get_or_404(id)
     if post.author != current_user:
         abort(403)

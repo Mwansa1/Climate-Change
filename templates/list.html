@@ -1,12 +1,7 @@
 {% extends "layout.html" %} {% block content %} <div class='content-section'>
-    <title> My List </title>
+    <title> My Suggestions List </title>
     <h2 style="text-align:center">{{ subtitle }}</h2>
-    <div class='content-section'>
-        <section class='line'>
-            <div>
-                <form method="post"> {% for index in range(data|length) %} <input type="checkbox" name="suggestion" id="{{ data[index] }}" value="{{ index }}">
-                    <label for="{{ data[index] }}"> {{ stringme(data[index]) }}</label><br> {% endfor %} <input type="submit">
-                </form>
-            </div>
-        </section>
-    </div> {% endblock content %}
+    <ul class='post-bg2'>{% for index in range(data|length) %} <li>
+            {{ data[index] }}
+        </li> {% endfor %} </ul>
+</div> {% endblock content %}
