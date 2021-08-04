@@ -22,11 +22,8 @@ jobs:
           pip3 install email-validator
           pip3 install flask-bcrypt
           pip3 install turbo-flask
-          pip3 install weatherAPI
           pip3 install requests
-          pip3 instal forms
           pip3 install sqlalchemy
-          pip3 install blog
           pip3 install pandas
           pip3 install os
           pip3 install flask-migrate
@@ -45,8 +42,10 @@ jobs:
         run: |
           python3 -m pytest
 
-      - name: Test webpages
-        run: python3 testing/page_loading_tests.py
+     - name: Test webpages and users
+        run: |
+            python3 testing/page_loading_tests.py
+            python3 testing/test_users.py
         
      - name: Test user login/register
         run: python3 testing/test_users.py
