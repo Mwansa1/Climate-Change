@@ -1,11 +1,16 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@500&display=swap');
  */
-
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@600&display=swap');
 
 /* li a:hover:not(.active) {
   background-color: #111;
 } */
+
+*{
+    box-sizing:border-box;
+/*     overflow-x:hidden; */
+}
+
 
 body {
     background-image: url('climate change.png');
@@ -14,17 +19,21 @@ body {
     background-size: 100% 100%;
     color: #333333;
     margin-top: 5rem;
-    text-align:center;
+    text-align: center;
     /* margin-top: -5px; */
-    
-  
 }
 
-
-h1, h2, h3, h4, h5, h6, p, label{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label {
     color: #fff;
-/*     font-family:"Muslih" , sans-serif; */
-    font-family:'Source Serif Pro', serif;
+    /*     font-family:"Muslih" , sans-serif; */
+    font-family: 'Source Serif Pro', serif;
     line-height: 1.6;
 }
 
@@ -33,23 +42,23 @@ h1, h2, h3, h4, h5, h6, p, label{
     width: 100px;
     height: 100px;
     overflow-y: hidden;
+    overflow-x:hidden;
     
 }
 
-a.nav-item.nav-link, a.navbar-brand.mr-4 {
-/*     font-family: "Muslih"; */
-    font-family:'Source Serif Pro', serif;
-
+a.nav-item.nav-link,
+a.navbar-brand.mr-4 {
+    /*     font-family: "Muslih"; */
+    font-family: 'Source Serif Pro', serif;
 }
 
-section{
-    overflow:hidden;
-    position:relative;
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    
+section {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 p {
@@ -60,39 +69,33 @@ p {
     font-size: 1.5em;
 }
 
-img, svg {
+img,
+svg {
     vertical-align: middle;
     width: 100%
 }
-.container{
-     width: 100%;   
-     height: auto;
-     overflow-y:hidden;
-/*      padding-top: 5%; */
-}
 
+.container {
+    width: 100%;
+    height: auto;
+    overflow-y: hidden;
+    /*      padding-top: 5%; */
+}
 
 /* Login/ register page stuff 
  =====================
 */
-@media (min-width: 57em) {
-    #circle {
-        width: 100%;
-        height: 760px;
-    }
-    
-}
-.body{
-    padding:20%;
-}
 
+
+
+.body {
+    padding: 20%;
+}
 
 label.form-control-label {
-    font-family:'Source Serif Pro', serif;
+    font-family: 'Source Serif Pro', serif;
     font-size: 1.8em;
 }
-
-
 
 form#login-form {
     margin: 20%;
@@ -103,118 +106,120 @@ input.form-control {
     margin-bottom: .25em;
 }
 
-h1#register-header{
+h1#register-header {
     position: relative;
 }
+
 #circle {
-height: 100%;
-  width: 100%;
+    padding-bottom:100%
+    width: 100%;
     padding: 30px;
-  background: #3C675F;
-  border-radius: 50%;
-  text-align: center;
-  color:white;
+    background: #3C675F;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
 }
-
-
-
 
 /* Header stuff 
  ==================
 */
 .bg-steel {
-   background-color: rgba(0,0,0,0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .site-header .navbar-nav .nav-link {
-  color: #cbd5db;
-  font-family:'Source Serif Pro', serif;
-    
+    color: #cbd5db;
+    font-family: 'Source Serif Pro', serif;
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 .site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
+    font-weight: 500;
 }
 
 .content-section {
-/*   background: #ffffff; */
-  padding: 10px 20px;
-/*   border: 1px solid #dddddd; */
-  border-radius: 3px;
-  margin-bottom: 20px;
+    /*   background: #ffffff; */
+    padding: 10px 20px;
+    /*   border: 1px solid #dddddd; */
+    border-radius: 3px;
+    margin-bottom: 20px;
 }
 
 .article-title {
-  color: #444444;
+    color: #444444;
 }
 
 a.article-title:hover {
-  color: #428bca;
-  text-decoration: none;
+    color: #428bca;
+    text-decoration: none;
 }
 
 .article-content {
-  white-space: pre-line;
+    white-space: pre-line;
 }
 
 .article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
 }
 
 .article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
 }
 
 .article-metadata a:hover {
-  color: #333;
-  text-decoration: none;
+    color: #333;
+    text-decoration: none;
 }
 
 .article-svg {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
 }
 
 .account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
 }
 
 .account-heading {
-  font-size: 2.5rem;
+    font-size: 2.5rem;
 }
-
 
 .sticky {
-  position: fixed;
-  top: 0;
-  width: 100%
+    position: fixed;
+    top: 0;
+    width: 100%
 }
 
-.sticky + .content {
-  padding-top: 60px;
+.sticky+.content {
+    padding-top: 60px;
 }
-.post-bg1{
-  background-color:#39616D;
+
+.post-bg1 {
+    background-color: #39616D;
 }
-.post-bg2{
-  background-color:#448564;
+
+.post-bg2 {
+    background-color: #448564;
 }
-.post-bg3{
-  background-color:#EBBD10;
+
+.post-bg3 {
+    background-color: #EBBD10;
 }
-.modal .modal-dialog .modal-content{  background-color: white; }
+
+.modal .modal-dialog .modal-content {
+    background-color: white;
+}
 
 a {
     color:black;
@@ -230,17 +235,15 @@ a:hover {
     color: lightblue;
     text-decoration: none;
 }
-legend{
+
+legend {
     color: white;
     font-size: 1.8em;
-    font-family:'Source Serif Pro', serif;
+    font-family: 'Source Serif Pro', serif;
 }
-.helper{
+
+.helper {
     min-width: 0;
-    
     margin: 0% 30% 0% 15%;
-   
 }
-
-
 
