@@ -12,7 +12,7 @@ resources = package.resources
 
 x_col = 'Year'
 y_col = 'Annual Increase'
-title = 'Yearly Atmospheric Carbon Dioxide Rates'
+title = 'Yearly Atmospheric Carbon Dioxide Rates (1979-2017)'
 
 
 def get_info_to_df(sources):
@@ -26,5 +26,6 @@ def get_info_to_df(sources):
 def make_save_barchart():
     df = get_info_to_df(resources)
     ax = df.plot.bar(x=x_col, y=y_col, title=title)
+    plt.xlim(20,)
     fig = ax.get_figure()
     fig.savefig('static/barchart.png')
