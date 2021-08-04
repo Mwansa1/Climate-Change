@@ -1,9 +1,12 @@
-{% extends "layout.html" %} 
-{% block content %}
-<title>Suggestion Results</title>
+{% extends "layout.html" %} {% block content %} <title> Suggestions Found </title>
+<h2> Here are a few suggestions - select your favorites to add to your list! </h2>
 <div class='content-section'>
-  {% for s in suggestions %}  
-    <p >{{s}}</p>
-  {% endfor %}
-</div>
-{% endblock content %}
+    <section class='line'>
+        <div>
+            <form method="post"> {% for index in range(suggestions|length) %} <input type="checkbox" name="suggestion" id="{{ suggestions[index] }}" value="{{ index }}">
+                <label for="{{ suggestions[index] }}"> {{ suggestions[index] }}</label>
+                <br> {% endfor %} <input type="submit" class="btn btn-outline-light">
+            </form>
+        </div>
+    </section>
+</div> {% endblock content %}
