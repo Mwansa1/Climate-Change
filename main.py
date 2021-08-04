@@ -193,7 +193,7 @@ def logout():
 # def second_page():
 
 @app.route("/suggestions", methods=['GET', 'POST'])
-def suggestions():
+def suggestions_search():
     # food suggestions
     food_suggestions = [
         {'id': 0, 'content': 'Avoid overly processed foods. These foods have a high carbon footprint due to manufacuring, traveling, and distribution.'},
@@ -257,7 +257,7 @@ def suggestions():
         if form.suggestion.data == 'food_suggestion':
             for i in range(5):
                 suggestions.append(FoodSuggestion.query.get(i).content)
-            return render_template('suggestionResults.html', suggestions=suggestions)
+            return redirect(url_for('suggestionResults.html', suggestions=suggestions))
         
         elif form.suggestion.data == 'travel_suggestion':
             for i in range(5):
@@ -270,6 +270,11 @@ def suggestions():
             return render_template('suggestionResults.html', suggestions=suggestions)
     
     return render_template("suggestions.html", form=form)
+
+@app.route("/suggestions_found", methods=['GET', 'POST'])
+@login_required
+def suggestions_found():
+    return render_template('suggestionResults.html')
 
 # unfinished - need to save suggestions to user before it can read from a table
 @app.route("/list")
