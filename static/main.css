@@ -245,7 +245,10 @@ a:hover#change {
     color: black;
     text-decoration: none;
 }
-
+a:visited#source{
+    color: gray;
+    text-decoration: none;
+}
 a:visited {
     color:black;
   text-decoration: none;

@@ -100,17 +100,19 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
+
 class Suggestions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.Text)
+    content = db.Column(db.Text, unique=True)
     user_id = db.Column(
         db.String(20),
         db.ForeignKey('user.username'),
         nullable=False)
 
     def __repr__(self):
-        return f"Suggestion('{self.content}')"
-    
+        return f"Suggestions('{self.content}')"
+
+
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
@@ -138,7 +140,7 @@ class Uploads(db.Model):
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return f"Post('{self.image_file}', '{self.date_posted}')"
+        return f"Uploads('{self.image_file}', '{self.date_posted}')"
 
 
 class FoodSuggestion(db.Model):
@@ -274,7 +276,7 @@ def suggestions_search():
         return redirect(url_for('suggestions_found', suggestions=category))
     return render_template("suggestions.html", form=form)
 
-# not working rn
+
 @app.route("/suggestions_found", methods=['GET', 'POST'])
 @login_required
 def suggestions_found():
@@ -282,63 +284,48 @@ def suggestions_found():
     suggestions = {}
     # random number list, to be shuffled
     random_num_list = [0, 1, 2, 3, 4, 5]
-    
+
     suggestion = request.args.get('suggestions', None)
-    
+
     if suggestion == 'food_suggestion':
         random.shuffle(random_num_list)
         for i in range(5):
             random_num = random_num_list[i]
             list.append(FoodSuggestion.query.get(random_num).content)
-            suggestions[i] = FoodSuggestion.query.get(i).content
     elif suggestion == 'travel_suggestion':
         random.shuffle(random_num_list)
         for i in range(5):
             random_num = random_num_list[i]
             list.append(TravelSuggestion.query.get(random_num).content)
-            suggestions[i] = TravelSuggestion.query.get(i).content
     elif suggestion == 'energy_suggestion':
         random.shuffle(random_num_list)
         for i in range(5):
             random_num = random_num_list[i]
             list.append(EnergySuggestion.query.get(random_num).content)
-            suggestions[i] = EnergySuggestion.query.get(i).content
-    series = pd.Series(suggestions)
     if request.method == 'POST':
-        index = request.form.getlist('suggestion')
-        selected = series.iloc[index]
-        print(selected)
-        create_table()
-        selected.to_sql(
-            current_user.get_id(),
-            con=db.engine,
-            if_exists='append',
-            index=False)
+        slist = request.form.getlist('suggestion')
+        print(slist)
+        for item in slist:
+            if not bool(
+                Suggestions.query.filter_by(
+                    content=str(item)).first()):
+                sugg_list = Suggestions(content=str(item), author=current_user)
+                db.session.add(sugg_list)
+        db.session.commit()
         flash(f'Suggestions added!', 'success')
-        return redirect(url_for('home'))  # change to my list once working
+        return redirect(url_for('show_user_list'))
 
     return render_template('suggestionResults.html', suggestions=list)
 
-# unfinished - need to save suggestions to user before it can read from a table
+
 @app.route("/list")
 @login_required
 def show_user_list():
-    try:
-        suggestions = pd.read_sql_table(current_user.get_id(), con=db.engine)
-    except ValueError:
-        flash(f'No suggestions added to your list yet!', 'success')
-        return redirect(url_for('home'))
-    else:
-        user_list = []
-        for index, row in suggestions:
-            user_list.append(index)
-        return render_template('list.html',
-                               subtitle='My Suggestions List',
-                               data=user_list)
+    data = Suggestions.query.order_by(Suggestions.id.desc())
+    return render_template('list.html', subtitle='My Suggestions List',
+                           data=data)
 
 # create post feature
-
-
 @app.route("/create", methods=['GET', 'POST'])
 @login_required
 def createpost():
@@ -372,12 +359,13 @@ def post(id):
     post = Posts.query.get_or_404(id)
     return render_template('post.html', post=post)
 
+
 # displays post based on the id provided
 @app.route('/uploads/<int:id>')
 @login_required
-def uploadtoPost(id):
+def upload(id):
     upload = Uploads.query.get_or_404(id)
-    return render_template('post.html', upload=upload)
+    return render_template('deleteupload.html', upload=upload)
 
 
 # displays all post in descending order
@@ -421,6 +409,20 @@ def delete_post(id):
     if current_user != post.author:
         abort(403)
     db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted!', 'success')
+    # return render_template('posts.html', post=post)
+    return redirect(url_for('posts'))
+
+
+@app.route("/upload/<int:id>/delete", methods=['POST'])
+@login_required
+def delete_upload(id):
+    upload = Uploads.query.get_or_404(id)
+    # insures the user is fixing there post and not anyone else
+    if current_user != upload.author:
+        abort(403)
+    db.session.delete(upload)
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     # return render_template('posts.html', post=post)

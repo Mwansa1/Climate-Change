@@ -1,7 +1,9 @@
 {% extends "layout.html" %} {% block content %} <div class='content-section'>
     <title> My Suggestions List </title>
     <h2 style="text-align:center">{{ subtitle }}</h2>
-    <ul class='post-bg2'>{% for index in range(data|length) %} <li>
-            {{ data[index] }}
+    <ul class='post-bg2 p-4'>
+        {% for i in data %} <li>
+    
+            {{ i.content }}
         </li> {% endfor %} </ul>
 </div> {% endblock content %}

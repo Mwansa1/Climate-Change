@@ -1,15 +1,11 @@
-{% extends "layout.html" %} {% block content %} <title> Post </title>
+{% extends "layout.html" %} {% block content %} <title> Upload </title>
 <div class="col-sm-6 col-lg-6 mb-4" style="position: absolute; left: 25%; top: 30%;">
-    <div class="card post-bg1 text-center p-3">
-        <figure class="mb-0">
-            <h2>{{ post.title}}</h2>
-            <blockquote class="blockquote text-white">
-                {{post.content}}
-            </blockquote>
-            <figcaption class="blockquote-footer text-white mb-0">
-                {{ post.author.username }}
-                <small> posted on {{ post.date_posted.strftime('%m/%d/%y') }}</small>
-            </figcaption> {% if current_user == post.author %} <a class="btn btn-secondary btn-sm mt-3 mb-1" href="{{ url_for('update_post', id=post.id) }}">Update</a>
+    <div class="card post-bg2">
+        <img src="{{ upload.image_file }}" class="card-img-top" alt="user image">
+        <div class="card-body">
+            <p class="card-text">{{upload.caption}}</p>
+            <small> {{ upload.author.username }} posted on {{ upload.date_posted.strftime('%m/%d/%y')}}</small> <br>
+             {% if current_user == upload.author %}
             <button type="button" class="btn btn-danger mt-3 btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete</button>
             <br>
             <!-- Modal -->
@@ -26,12 +22,12 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <form method="POST" action="{{ url_for('delete_post', id=post.id) }}">
+                            <form method="POST" action="{{ url_for('delete_upload', id=upload.id) }}">
                                 <input class="btn btn-danger" type="submit" value="Delete">
                             </form>
                         </div>
                     </div>
                 </div>
-            </div> {%endif%} <a class="btn btn-secondary mt-2 mb-1" href='{{ url_for('posts', id=post.id) }}'> Back to Feed</a>
+            </div> {%endif%} <a class="btn btn-secondary mt-2 mb-1" href='{{ url_for('posts') }}'> Back to Feed</a>
         </figure>
     </div> {% endblock content %}
