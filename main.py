@@ -308,6 +308,7 @@ def show_user_list():
     return render_template('list.html', subtitle='My Suggestions List',
                            data=data)
 
+
 # create post feature
 @app.route("/create", methods=['GET', 'POST'])
 @login_required
