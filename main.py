@@ -283,7 +283,7 @@ def suggestions_found():
     list = []
     # random number list, to be shuffled
     random_num_list = [0, 1, 2, 3, 4, 5]
-    
+
     suggestion = request.args.get('suggestions', None)
 
     if suggestion == 'food_suggestion':
@@ -303,17 +303,20 @@ def suggestions_found():
         for i in range(5):
             random_num = random_num_list[i]
             list.append(EnergySuggestion.query.get(random_num).content)
-            
+
     if request.method == 'POST':
         slist = request.form.getlist('suggestion')
-        print(slist) 
+        print(slist)
         for item in slist:
-            if not bool(Suggestions.query.filter_by(content=str(item)).first()):
+            if not bool(
+                Suggestions.query.filter_by(
+                    content=str(item)).first()):
                 sugg_list = Suggestions(content=str(item), author=current_user)
                 db.session.add(sugg_list)
         db.session.commit()
         flash(f'Suggestions added!', 'success')
-        return redirect(url_for('home'))  # change to my list once working
+        # change to my list once working
+        return redirect(url_for('show_user_list'))
 
     return render_template('suggestionResults.html', suggestions=list)
 
