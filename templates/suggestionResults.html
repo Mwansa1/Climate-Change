@@ -3,8 +3,9 @@
 <div class='content-section'>
     <section class='line'>
         <div>
-            <form method="post"> {% for index in range(suggestions|length) %} <input type="checkbox" name="suggestion" id="{{ suggestions[index] }}" value="{{ index }}">
-                <label for="{{ suggestions[index] }}"> {{ suggestions[index] }}</label>
+            <form method="post"> {% for index in range(suggestions|length) %} 
+                <input type="checkbox" name="suggestion" id="{{ index }}" value="{{ suggestions[index] }}">
+                <label for="{{ index }}"> {{ suggestions[index] }}</label>
                 <br> {% endfor %} <input type="submit" class="btn btn-outline-light">
             </form>
         </div>
