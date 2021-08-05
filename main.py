@@ -277,7 +277,6 @@ def suggestions_search():
     return render_template("suggestions.html", form=form)
 
 
-# not working rn
 @app.route("/suggestions_found", methods=['GET', 'POST'])
 @login_required
 def suggestions_found():
@@ -319,7 +318,6 @@ def suggestions_found():
     return render_template('suggestionResults.html', suggestions=list)
 
 
-# unfinished - need to save suggestions to user before it can read from a table
 @app.route("/list")
 @login_required
 def show_user_list():
