@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
+<div style="background-color:#1c87c9;">
+    
 
     <h2>City Weather Forecast</h2>
 <div class = "weather-container">
@@ -10,5 +12,5 @@
       <p style="text-align:center">Minimum Temperature: {{data.temp_min}} °F </p>
 </div>
       <a href="{{url_for('search_by_city')}}" method="POST" role="form">  
-
+</div>
 {% endblock content %}
