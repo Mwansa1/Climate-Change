@@ -6,8 +6,7 @@ from turbo_flask import Turbo
 
 import requests
 from weatherAPI import search
-# from co2_emissions import make_save_barchart
-# from weatherAPI import
+from co2_emissions import make_save_barchart
 
 from forms import RegistrationForm, LoginForm, SuggestionForm
 from sqlalchemy import exc, text
@@ -31,8 +30,6 @@ from suggestions import (
 UPLOAD_FOLDER = './static/files'
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-
-# import statements from prev projects, add/remove as needed
 app = Flask(__name__)
 turbo = Turbo(app)
 bcrypt = Bcrypt(app)
@@ -44,10 +41,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-# make_save_barchart()
+make_save_barchart()
 
 login_manager = LoginManager(app)
-# login_manager.init_app(app)
 login_manager.login_view = "login"
 login_manager.login_message_category = 'info'
 
@@ -55,13 +51,6 @@ login_manager.login_message_category = 'info'
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
-
-
-def create_table():
-    query = text("""CREATE TABLE IF NOT EXISTS ' {} ' (
-    id STRING,
-    suggestion STRING NOT NULL PRIMARY KEY)""".format(str(current_user.get_id())))
-    db.engine.execute(query)
 
 
 class User(db.Model):
@@ -199,6 +188,7 @@ def populate_suggestions():
 
 populate_suggestions()
 
+
 # basic homepage
 @app.route("/")
 @app.route("/home")
@@ -250,6 +240,7 @@ def login():
                     'Login Unsuccessful. Please check email and password',
                     'danger')
     return render_template("login.html", form=form)
+
 
 # logout feature
 @app.route("/logout")
@@ -307,7 +298,6 @@ def suggestions_found():
         db.session.commit()
         flash(f'Suggestions added!', 'success')
         return redirect(url_for('show_user_list'))
-
     return render_template('suggestionResults.html', suggestions=list)
 
 
@@ -335,7 +325,6 @@ def createpost():
         # Add post to databasse
         db.session.add(post)
         db.session.commit()
-
         # Return message
         flash('Blog Post added', 'success')
         return redirect(url_for('posts'))
@@ -398,7 +387,7 @@ def update_post(id):
 @login_required
 def delete_post(id):
     post = Posts.query.get_or_404(id)
-    # insures the user is fixing there post and not anyone else
+    # ensures the user is fixing their post and not anyone else
     if current_user != post.author:
         abort(403)
     db.session.delete(post)
@@ -412,7 +401,7 @@ def delete_post(id):
 @login_required
 def delete_upload(id):
     upload = Uploads.query.get_or_404(id)
-    # insures the user is fixing there post and not anyone else
+    # ensures the user is fixing their post and not anyone else
     if current_user != upload.author:
         abort(403)
     db.session.delete(upload)
@@ -431,7 +420,6 @@ def weather():
 def search_by_city():
     city = request.form["city"]
     data = search(city)
-#     print(data)
     return render_template("weather.html", data=data)
 
 
@@ -440,12 +428,10 @@ def save_picture(form_picture):
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(app.root_path, UPLOAD_FOLDER, picture_fn)
-
     output_size = (125, 125)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
-
     return picture_fn
 
 
