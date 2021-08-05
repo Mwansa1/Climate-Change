@@ -1,8 +1,8 @@
-# greenbook
+# GreenLink
 *This software retrieves weather information from the Weather API.*
 
 
-GreenBook is the new social media platform that focuses on sustainability - like Facebook, but green! 
+GreenLink is the new social media platform that focuses on sustainability - like Facebook, but green! 
 On our application, users can keep track of their sustainable lifestyle goals and learn more about what they can do to advocate for our climate.
 With a sense of community, users feel more supported and are more willing to make sustainable changes.
 
@@ -18,13 +18,15 @@ With a sense of community, users feel more supported and are more willing to mak
 * sudo pip3 install flask-wtf
 * sudo pip3 install flask-sqlalchemy
 * sudo pip3 install email-validator
+* sudo pip3 install flask-login
 * sudo pip3 install flask-bcrypt
 * sudo pip3 install turbo-flask
 * sudo pip3 install requests
 * sudo pip3 install sqlalchemy
 * sudo pip3 install pandas
-* sudo pip3 install os
 * sudo pip3 install flask-migrate
+* sudo pip3 install matplotlib
+* sudo pip3 install datapackage
       
 * To install
   * sudo install Climate-Change 
