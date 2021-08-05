@@ -365,9 +365,9 @@ def post(id):
 # displays post based on the id provided
 @app.route('/uploads/<int:id>')
 @login_required
-def uploadtoPost(id):
+def upload(id):
     upload = Uploads.query.get_or_404(id)
-    return render_template('post.html', upload=upload)
+    return render_template('deleteupload.html', upload=upload)
 
 
 # displays all post in descending order
@@ -411,6 +411,20 @@ def delete_post(id):
     if current_user != post.author:
         abort(403)
     db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted!', 'success')
+    # return render_template('posts.html', post=post)
+    return redirect(url_for('posts'))
+
+
+@app.route("/upload/<int:id>/delete", methods=['POST'])
+@login_required
+def delete_upload(id):
+    upload = Uploads.query.get_or_404(id)
+    # insures the user is fixing there post and not anyone else
+    if current_user != upload.author:
+        abort(403)
+    db.session.delete(upload)
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     # return render_template('posts.html', post=post)
