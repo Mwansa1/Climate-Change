@@ -61,7 +61,7 @@ def load_user(user_id):
 def create_table():
     query = text("""CREATE TABLE IF NOT EXISTS ' {} ' (
     id STRING,
-    suggestion STRING)""".format(str(current_user.get_id())))
+    suggestion STRING NOT NULL PRIMARY KEY)""".format(str(current_user.get_id())))
     db.engine.execute(query)
 
 
@@ -281,6 +281,7 @@ def suggestions_search():
 @login_required
 def suggestions_found():
     list = []
+    suggestions = {}
     # random number list, to be shuffled
     random_num_list = [0, 1, 2, 3, 4, 5]
 
@@ -291,19 +292,16 @@ def suggestions_found():
         for i in range(5):
             random_num = random_num_list[i]
             list.append(FoodSuggestion.query.get(random_num).content)
-
     elif suggestion == 'travel_suggestion':
         random.shuffle(random_num_list)
         for i in range(5):
             random_num = random_num_list[i]
             list.append(TravelSuggestion.query.get(random_num).content)
-
     elif suggestion == 'energy_suggestion':
         random.shuffle(random_num_list)
         for i in range(5):
             random_num = random_num_list[i]
             list.append(EnergySuggestion.query.get(random_num).content)
-
     if request.method == 'POST':
         slist = request.form.getlist('suggestion')
         print(slist)
@@ -315,7 +313,6 @@ def suggestions_found():
                 db.session.add(sugg_list)
         db.session.commit()
         flash(f'Suggestions added!', 'success')
-        # change to my list once working
         return redirect(url_for('show_user_list'))
 
     return render_template('suggestionResults.html', suggestions=list)
@@ -329,8 +326,6 @@ def show_user_list():
                            data=data)
 
 # create post feature
-
-
 @app.route("/create", methods=['GET', 'POST'])
 @login_required
 def createpost():

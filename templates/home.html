@@ -5,7 +5,7 @@
         <h3 id="scroll-text">Scroll Down...</h3>
         
         <div class="planet" id="planet-img"> </div>
-        <div class="text-box">
+        <div class="text-box" id="yellow-box">
             <h1 id="stats-text">Welcome to GreenLink!</h1>
             <p> GreenLink is the next big thing in social 
                 media - like Facebook, but sustainably focused!
@@ -14,19 +14,24 @@
         </div>
         
         <script type="text/javascript">
-            value = 
             let earth = document.getElementById('planet-img');
             let text = document.getElementById('scroll-text');
-            var navbar = document.getElementById("navbar");
-            var sticky = navbar.offsetTop;
+            let yellow_box = document.getElementById('yellow-box');
+//             var navbar = document.getElementById("navbar");
+//             var sticky = navbar.offsetTop;
             window.addEventListener('scroll', function() {
-                if(window.pageYOffset >= sticky) {
-                    navbar.classList.add("sticky")
-                } else {
-                    navbar.classList.remove("sticky");
-                }
-            earth.style.transform = 'translateY(' + value * -1.95 + 'px)'; 
-            text.style.transform = 'rotate(89.19deg) translatex(' + value * 0.75 + 'px)';
+                var value = window.scrollY;
+//                 if(window.pageYOffset >= sticky) {
+//                     navbar.classList.add("sticky")
+//                 } else {
+//                     navbar.classList.remove("sticky");
+//                 }
+//                
+//             earth.style.transform = 'translateY(' + value * -1.95 + 'px)'; 
+                                  
+                    console.log(value);
+                    text.style.transform = 'rotate(89.19deg) translatex(' + value * 0.75 + 'px)';
+                    yellow_box.style.transform = 'translatey(' + value * -0.25 + 'px)';
             })
         </script>
     </div>
@@ -100,7 +105,7 @@
                 </form>
             </div>
             <div>
-                <div class="text-box-rounded">
+                <div class="text-box-rounded" >
                     <img src="static/barchart.png" alt="barchart carbon emissions">
                 </div>
             </div>
