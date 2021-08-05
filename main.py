@@ -6,9 +6,8 @@ from turbo_flask import Turbo
 
 import requests
 from weatherAPI import search
-from co2_emissions import make_save_barchart
+# from co2_emissions import make_save_barchart
 # from weatherAPI import
-# import statements from prev projects, add/remove as needed
 
 from forms import RegistrationForm, LoginForm, SuggestionForm
 from sqlalchemy import exc, text
@@ -45,7 +44,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-make_save_barchart()
+# make_save_barchart()
 
 login_manager = LoginManager(app)
 # login_manager.init_app(app)
@@ -128,7 +127,6 @@ class Posts(db.Model):
 
 
 class Uploads(db.Model):
-
     __tablename__ = 'uploads'
     id = db.Column(db.Integer, primary_key=True)
     image_file = db.Column(db.String(30), nullable=False)
@@ -169,8 +167,6 @@ class EnergySuggestion(db.Model):
     def __repr__(self):
         return f"EnergySuggestion('{self.id}', '{self.content}')"
 
-# class SavedSuggestions()
-
 
 def populate_suggestions():
     # populate food suggestion table
@@ -203,9 +199,7 @@ def populate_suggestions():
 
 populate_suggestions()
 
-# basic homepage, to be edited as needed with layout.html and main.css
-
-
+# basic homepage
 @app.route("/")
 @app.route("/home")
 def home():
@@ -257,9 +251,7 @@ def login():
                     'danger')
     return render_template("login.html", form=form)
 
-# potentially the logout feature
-
-
+# logout feature
 @app.route("/logout")
 @login_required
 def logout():
@@ -268,6 +260,7 @@ def logout():
 
 
 @app.route("/suggestions", methods=['GET', 'POST'])
+@login_required
 def suggestions_search():
     # form for selecting suggestion type
     form = SuggestionForm()
