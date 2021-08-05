@@ -2,7 +2,7 @@
 <h2>{{ text }}</h2>
 <a class="btn btn-outline-light mt-2 mb-4 btn-lg" id='change' href='/create'> Create Post </a>
 <a class="btn btn-outline-light mt-2 mb-4 btn-lg" id='change' href='/upload'> Upload Image </a>
-<div class="row" data-masonry='{"percentPosition": true }' style="position: relative; height: 1044px;"> 
+<div class="row" data-masonry='{"percentPosition": true }' style="position: relative;"> 
     {% for post in posts %} 
     {% if post.id % 3 == 0 %} <div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">
         <div class="card post-bg3 text-center p-3">
