@@ -55,9 +55,13 @@
     {% for upload in uploads %} 
     <div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">
     <div class="card post-bg2">
+        <a href='{{ url_for('upload', id=upload.id) }}'>
         <img src="{{ upload.image_file }}" class="card-img-top" alt="user image">
+             </a>
         <div class="card-body">
+            <a href='{{ url_for('upload', id=upload.id) }}'>
             <p class="card-text">{{upload.caption}}</p>
+                </a>
             <small> {{ upload.author.username }} posted on {{ upload.date_posted.strftime('%m/%d/%y')}}</small>
         </div></div>
     </div> 
