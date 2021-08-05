@@ -265,7 +265,9 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
-
+@app.route('/team')
+def team():
+    return render_template('team.html')
 
 @app.route("/suggestions", methods=['GET', 'POST'])
 def suggestions_search():

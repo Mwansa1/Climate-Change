@@ -84,12 +84,11 @@ h3#scroll-text {
 .text-box {
     right: 0px;
     width: 100%;
-    
     border: dashed;
     height: 40em;
     align-content: center;
     padding: 5%;
-    top: 50vh;
+    top: 20vh;
     position: relative;
     background: #EBBD10;
 }
@@ -118,7 +117,7 @@ h3#scroll-text {
     position: relative;
     margin-left: 40px;
     width: 90%;
-    height: 48em;
+    height: 30em;
     padding: 2em;
     overflow-y: hidden;
     background: #448564;
@@ -273,10 +272,10 @@ a.button-main:hover{
      .text-box {
            border: dashed;
             width: 45%;
-            height: 40em;
+            height: 35em;
             align-content: center;
             padding: 5%;
-            top: 50vh;
+            top: 0vh;
             position: relative;
             /* transform: translate3d(-87%, -6%, 10px); */
             right: -38vw;

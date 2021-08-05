@@ -38,7 +38,7 @@ label, li{
 }
 
 li{
-/*     text-align:left; */
+    text-align:left; 
     font-size:16px;
 }
 
@@ -268,5 +268,24 @@ legend {
 .helper {
     min-width: 0;
     margin: 0% 30% 0% 15%;
+}
+footer{
+    color: #d3d3d3;
+    font-size: 12px;
+    position:absolute;
+    transform: translatey(200%);
+    
+}
+a#footer {
+  color:#d3d3d3;
+  text-decoration: none;
+}
+a:hover#footer {
+    color: white;
+    text-decoration: none;
+}
+a:visited#footer{
+    color: gray;
+    text-decoration: none;
 }
 <p style="text-align:center">
